@@ -2,6 +2,7 @@ import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react'
 import styles from './BurgerIngredients.module.css'
 
+
 import {IngredientsList} from './IngredientsList/IngredientsList.jsx'
 
 const TabMenu = 
@@ -27,23 +28,23 @@ const TabMenu =
     return (
       <section className = {styles.ingredients} >
         <h2 className="text text_type_main-large">Соберите бургер</h2>
-        <TabMenu/>
+        {/* <TabMenu/> */}
         <div className='ingredientSection buns'>
           <h3>Булки</h3>
           <ul className='ingredientList'>
-            <IngredientsList type="buns"/>
+            <IngredientsList type="bun"/>
           </ul>
         </div>
         <div className='ingredientSection sauces'>
           <h3>Соусы</h3>
           <ul className='ingredientList'>
-            {/* <Ingredients type='sauses'/> */}
+            <IngredientsList type='sauce'/>
           </ul>
         </div>
         <div className='ingredientSection main'>
          <h3>Начинки</h3>
          <ul className='ingredientList'>
-            {/* <Ingredients type='main'/> */}
+            <IngredientsList type='main'/>
           </ul>
         </div>
 
