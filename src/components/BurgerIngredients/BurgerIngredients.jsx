@@ -28,7 +28,7 @@ const TabMenu =
     return (
       <section className = {styles.ingredients} >
         <h2 className="text text_type_main-large">Соберите бургер</h2>
-        {/* <TabMenu/> */}
+        <TabMenu/>
         <div className='ingredientSection buns'>
           <h3>Булки</h3>
           <ul className='ingredientList'>
