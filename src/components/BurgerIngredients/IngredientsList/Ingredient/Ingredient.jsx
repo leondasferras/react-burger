@@ -7,11 +7,11 @@ export const Ingredient = (props) => {
     return(
             <li className ={styles.ingredientItem}>
             <img className='pl-4 pr-4' src = {info.image}></img>
-            <div className={`${styles.price} mt-1 mb-1`}>
+            <section className={`${styles.price} mt-1 mb-1`}>
                 <span className='text text_type_digits-default mr-2'>{info.price}</span>
                 <CurrencyIcon type="primary"/>
-            </div>
-            <h4 className={`${styles.itemName} text text_type_main-default mt-1 mb-6`}>{info.name}</h4>
+            </section>
+            <h4 className={`${styles.itemName} text text_type_main-defaultн mt-1 mb-6`}>{info.name}</h4>
             <Counter count={1} size="small"/>
         </li>
     )

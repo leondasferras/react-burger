@@ -1,16 +1,18 @@
-import React from 'react';
-import {AppHeader} from './components/AppHeader/AppHeader.jsx'
-import './App.css';
-import { BurgerIngredients } from './components/BurgerIngredients/BurgerIngredients.jsx';
+// import React from 'react';
+// import { AppHeader } from './components/AppHeader/AppHeader.jsx'
+// import './App.css';
+// import { BurgerIngredients } from './components/BurgerIngredients/BurgerIngredients.jsx';
+// import { BurgerConstructor } from './components/BurgerConstructor/BurgerConstructor.jsx';
 
-const  App = () => {
-  return (
-    <div className="App">
-<AppHeader/>
-<BurgerIngredients/>
+// const  App = () => {
+//   return (
+//     <section className="App">
+// <AppHeader/>
+// <BurgerIngredients/>
+// <BurgerConstructor/>
 
-    </div>
-  );
+//     </section>
+//   );
 
-}
-export default App;
+// }
+// export default App;

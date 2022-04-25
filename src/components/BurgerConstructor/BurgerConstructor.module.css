@@ -1,0 +1,21 @@
+.constructor {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemsWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.totalAndButton {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+}
