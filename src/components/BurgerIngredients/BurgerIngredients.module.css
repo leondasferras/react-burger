@@ -1,3 +1,11 @@
 .ingredients {
     width: 600px;
 }
+
+.ingredientheader {
+ text-align: start;
+}
+
+.sectionHeader {
+    text-align: start;
+}

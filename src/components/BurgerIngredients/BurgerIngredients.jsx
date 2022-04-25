@@ -26,24 +26,24 @@ const TabMenu =
 
   export const BurgerIngredients = () => {
     return (
-      <section className = {styles.ingredients} >
-        <h2 className="text text_type_main-large">Соберите бургер</h2>
+      <section className = {`${styles.ingredients} `} >
+        <h2 className={`${styles.sectionHeader} text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
         <TabMenu/>
         <div className='ingredientSection buns'>
-          <h3>Булки</h3>
-          <ul className='ingredientList'>
+          <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Булки</h3>
+          <ul className='ingredientList pl-4 pr-4'>
             <IngredientsList type="bun"/>
           </ul>
         </div>
         <div className='ingredientSection sauces'>
-          <h3>Соусы</h3>
-          <ul className='ingredientList'>
+          <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Соусы</h3>
+          <ul className='ingredientList pl-4 pr-4'>
             <IngredientsList type='sauce'/>
           </ul>
         </div>
         <div className='ingredientSection main'>
-         <h3>Начинки</h3>
-         <ul className='ingredientList'>
+         <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Начинки</h3>
+         <ul className='ingredientList pl-4 pr-4'>
             <IngredientsList type='main'/>
           </ul>
         </div>
