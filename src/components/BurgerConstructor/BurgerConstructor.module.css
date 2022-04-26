@@ -9,8 +9,8 @@
   gap: 10px;
   list-style: none;
   overflow-y: scroll;
-  max-height: 75vh;
-}
+  height: 100%;
+  }
 
 .item {
   width: 100%;

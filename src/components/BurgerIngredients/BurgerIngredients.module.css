@@ -11,9 +11,9 @@
 }
 
 .ingredientsWrapper {
-    max-height: 80vh;
     overflow-y: scroll;
     scrollbar-color: rgb(117, 104, 130);
+    height: 100%;
   }
 
 

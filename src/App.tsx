@@ -10,7 +10,7 @@ import { BurgerConstructor} from './components/BurgerConstructor/BurgerConstruct
 function App() {
 
   return (
-    <div className="App">
+    <div className={styles.App}>
 <AppHeader/>
 <main className={styles.main}>
   <BurgerIngredients data={data}/>
