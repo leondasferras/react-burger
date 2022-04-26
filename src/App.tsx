@@ -1,16 +1,24 @@
 import React from 'react';
-import {AppHeader} from './components/AppHeader/AppHeader.jsx'
 import styles from './App.module.css'
+import {data} from "./utils/data";
+import {AppHeader} from './components/AppHeader/AppHeader.jsx'
 import { BurgerIngredients } from './components/BurgerIngredients/BurgerIngredients.jsx';
 import { BurgerConstructor} from './components/BurgerConstructor/BurgerConstructor.jsx'
 
+
+
 function App() {
+
+    let activeIngredientsArray = [];
+
+
+
   return (
     <div className="App">
 <AppHeader/>
 <main className={styles.main}>
-  <BurgerIngredients/>
-  <BurgerConstructor/>
+  <BurgerIngredients data={data}/>
+  <BurgerConstructor />
 </main>
     </div>
   );

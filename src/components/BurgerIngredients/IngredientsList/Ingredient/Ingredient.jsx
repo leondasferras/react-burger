@@ -11,7 +11,7 @@ export const Ingredient = (props) => {
                 <span className='text text_type_digits-default mr-2'>{info.price}</span>
                 <CurrencyIcon type="primary"/>
             </section>
-            <h4 className={`${styles.itemName} text text_type_main-defaultн mt-1 mb-6`}>{info.name}</h4>
+            <h4 className={`${styles.itemName} text text_type_main-default mt-1 mb-6`}>{info.name}</h4>
             <Counter count={1} size="small"/>
         </li>
     )
