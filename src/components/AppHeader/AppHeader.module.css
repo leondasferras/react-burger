@@ -6,6 +6,11 @@
   align-items: center;
 }
 
+.logoWrapper {
+  margin-left: 112px;
+  margin-right: 289px;
+}
+
 .menuButton {
   display: flex;
   align-items: center;

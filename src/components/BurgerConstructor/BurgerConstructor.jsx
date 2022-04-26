@@ -1,32 +1,26 @@
-import {ConstructorElement, CurrencyIcon, Button  } from '@ya.praktikum/react-developer-burger-ui-components'
+import {ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react';
 import styles from './BurgerConstructor.module.css'
 
 
 
-export const BurgerConstructor = () => {
+export const BurgerConstructor = (props) => {
   return (
   <section className={`${styles.constructor} mt-25 ml-10`}>
-    <ul className={styles.itemsWrapper} >
-            <li><ConstructorElement
-          type="top"
-          isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={200}
-          thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
-      /></li>
-      <li><ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          price={50}
-          thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
-      /></li>
-      <li><ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
-      /></li>
+    <ul className={`${styles.itemsWrapper} pl-2 pr-2`} >
+         {props.data.map(item => {
+           return ( <li className={styles.item}>
+             <div className="mr-1">
+               <DragIcon type='pimary'/>
+             </div>
+             <ConstructorElement
+               type="null"
+               isLocked={true}
+               text={item.name}
+               price={item.price}
+               thumbnail={item.image}
+           /></li>)
+         })}
     </ul>
     <div className={`${styles.totalAndButton} mt-10`}>
       <div className={`${styles.total} mr-10`}>
@@ -42,3 +36,5 @@ export const BurgerConstructor = () => {
       )
     }
   
+
+

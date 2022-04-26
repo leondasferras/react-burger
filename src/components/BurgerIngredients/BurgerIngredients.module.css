@@ -1,5 +1,5 @@
 .ingredients {
-    width: 600px;
+    width: 610px;
 }
 
 .ingredientheader {
@@ -8,4 +8,20 @@
 
 .sectionHeader {
     text-align: start;
+}
+
+.ingredientsWrapper {
+    max-height: 80vh;
+    overflow-y: scroll;
+    scrollbar-color: rgb(117, 104, 130);
+  }
+
+
+.ingredientsWrapper::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgba(47, 47, 55, 1);
+}
+
+.ingredientsWrapper::-webkit-scrollbar-thumb {
+    background: rgba(133, 133, 173, 1);
 }

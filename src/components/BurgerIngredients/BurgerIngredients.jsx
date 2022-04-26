@@ -26,26 +26,28 @@ const TabMenu =
   export const BurgerIngredients = (props) => {
     return (
       <section className = {`${styles.ingredients} `} >
-        <h2 className={`${styles.sectionHeader} text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
+        <h2 className={`${styles.sectionHeader} text text_type_main-large mb-5`}>Соберите бургер</h2>
         <TabMenu/>
-        <section className='ingredientSection buns'>
-          <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Булки</h3>
-          <ul className='ingredientList pl-4 pr-4'>
-            <IngredientsList data={props.data} type="bun"/>
-          </ul>
-        </section>
-        <section className='ingredientSection sauces'>
-          <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Соусы</h3>
-          <ul className='ingredientList pl-4 pr-4'>
-            <IngredientsList data={props.data} type='sauce'/>
-          </ul>
-        </section>
-        <section className='ingredientSection main'>
-         <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Начинки</h3>
-         <ul className='ingredientList pl-4 pr-4'>
-            <IngredientsList data={props.data} type='main'/>
-          </ul>
-        </section>
+        <div className={styles.ingredientsWrapper}>
+          <section className='ingredientSection buns'>
+            <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Булки</h3>
+            <ul className='ingredientList pl-4 pr-4'>
+              <IngredientsList data={props.data} type="bun"/>
+            </ul>
+          </section>
+          <section className='ingredientSection sauces'>
+            <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Соусы</h3>
+            <ul className='ingredientList pl-4 pr-4'>
+              <IngredientsList data={props.data} type='sauce'/>
+            </ul>
+          </section>
+          <section className='ingredientSection main'>
+           <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Начинки</h3>
+           <ul className='ingredientList pl-4 pr-4'>
+              <IngredientsList data={props.data} type='main'/>
+            </ul>
+          </section>
+        </div>
       </section>
     )
 
