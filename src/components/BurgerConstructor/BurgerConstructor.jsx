@@ -29,7 +29,7 @@ export const BurgerConstructor = (props) => {
         </span>
         <CurrencyIcon type ="primary"/>
       </div>
-      <Button type="primary" size="large">Оформить заказ</Button>
+      <Button onClick={props.buttonHandler} type="primary" size="large">Оформить заказ</Button>
     </div>
   </section>
 

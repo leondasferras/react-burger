@@ -32,19 +32,19 @@ const TabMenu =
           <section className='ingredientSection buns'>
             <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Булки</h3>
             <ul className='ingredientList pl-4 pr-4'>
-              <IngredientsList data={props.data} type="bun"/>
+              <IngredientsList data={props.data} type="bun" ingredientClickHandler = {props.ingredientClickHandler}/>
             </ul>
           </section>
           <section className='ingredientSection sauces'>
             <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Соусы</h3>
             <ul className='ingredientList pl-4 pr-4'>
-              <IngredientsList data={props.data} type='sauce'/>
+              <IngredientsList data={props.data} type='sauce' ingredientClickHandler = {props.ingredientClickHandler}/>
             </ul>
           </section>
           <section className='ingredientSection main'>
            <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Начинки</h3>
            <ul className='ingredientList pl-4 pr-4'>
-              <IngredientsList data={props.data} type='main'/>
+              <IngredientsList data={props.data} type='main' ingredientClickHandler = {props.ingredientClickHandler}/>
             </ul>
           </section>
         </div>

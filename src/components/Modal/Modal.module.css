@@ -2,10 +2,12 @@
   width: 720px;
   z-index: 2;
   position: fixed;
-  left: 45%;
-  top: 45%;
+  left: 30%;
+  top: 20%;
   background-color: rgba(28, 28, 33, 1);
   border-radius: 40px;
+  display: flex;
+  
 }
 
 .titleAndCloseButton {
@@ -13,4 +15,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  align-self: flex-end;
+  width: 100%;
 }

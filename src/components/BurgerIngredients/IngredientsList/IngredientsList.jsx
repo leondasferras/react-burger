@@ -10,7 +10,7 @@ const ingredientsArray = props.data.filter(item =>
     )
 
 const ingredientsToRenderArray =  ingredientsArray.map((item => {
-     return  <Ingredient key = {item._id} data = {item}/>
+     return  <Ingredient key = {item._id} data = {item} clickHandler = {props.ingredientClickHandler}/>
     }))
 
 return ( <ul className={styles.ingredientsList}>
