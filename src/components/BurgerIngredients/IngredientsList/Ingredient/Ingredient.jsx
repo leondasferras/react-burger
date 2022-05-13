@@ -8,7 +8,7 @@ import styles from "./Ingredient.module.css";
 export const Ingredient = (props) => {
   const [info, setInfo] = useState(props.data);
   return (
-    <li onClick ={props.clickHandler}className={styles.ingredientItem}>
+    <li onClick ={() => props.clickHandler(info)} className={styles.ingredientItem}>
       <img className="pl-4 pr-4" src={info.image}></img>
       <section className={`${styles.price} mt-1 mb-1`}>
         <span className="text text_type_digits-default mr-2">{info.price}</span>

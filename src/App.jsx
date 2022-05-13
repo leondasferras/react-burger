@@ -21,20 +21,23 @@ function App() {
     getIngredientsData();
   }, []);
 
+  const [ingredientInModal, setIngredientInModal] = React.useState(null);
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
-  const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] =
-    React.useState(false);
+
    
   //Клик по кнопке "Оформить заказ"
   const buttonHandler = () => setIsOrderDetailsOpened(true)
 
   //Клик по ингредиенту
-  const ingredientClickHandler = () => setIsIngredientDetailsOpened(true);
+  const ingredientClickHandler = (data) => { 
+    setIngredientInModal(data)
+  }
 
   // Закрытие всех модалок
   const closeAllModals = () => {
     setIsOrderDetailsOpened(false);
-    setIsIngredientDetailsOpened(false);
+    setIngredientInModal(null)
+
   };
 
   // Обработка нажатия Esc
@@ -46,7 +49,7 @@ function App() {
     <div className={styles.App}>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients data={state.data} ingredientClickHandler ={ingredientClickHandler} />
+        <BurgerIngredients data={state.data} ingredientClickHandler = {ingredientClickHandler} setIngredientInModal={setIngredientInModal} />
         <BurgerConstructor data={state.data} buttonHandler={buttonHandler} />
       </main>
       {isOrderDetailsOpened && (
@@ -58,13 +61,15 @@ function App() {
           <OrderDetails />
         </Modal>
       )}
-            {isIngredientDetailsOpened && (
+            {ingredientInModal && (
         <Modal
           title="Детали ингредиента"
           onOverlayClick={closeAllModals}
           onEscKeydown={handleEscKeydown}
+          
         >
-          <IngredientDetails />
+          <IngredientDetails
+          ingredientData={ingredientInModal} />
         </Modal>
       )}
     </div>

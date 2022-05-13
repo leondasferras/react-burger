@@ -22,14 +22,14 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
   // Рендерим модалку в соответствующий DOM-элемент
   return createPortal(
     <>
-      <div className={`${styles.modal} pt-15 pr-10 pb-30 pl-10`}>
+      <div className={`${styles.modal} pt-15 pr-10 pb-15 pl-10`}>
         <div className={styles.titleAndCloseButton}>
           <h3 className='text text_type_main-large'>{title}</h3>
-          <CloseIcon/>
+          <div className={styles.closeButton} onClick={ () => onOverlayClick()}><CloseIcon/></div>
         </div>
-        {children} {/* Вложенное в компонент содержимое */}
+        {children} 
       </div>
-      <ModalOverlay onClick={onOverlayClick} /> {/* Подложка */}
+      <ModalOverlay onClick={onOverlayClick} /> 
     </>,
     modalsContainer 
   );

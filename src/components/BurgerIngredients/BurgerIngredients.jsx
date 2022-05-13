@@ -32,7 +32,7 @@ const TabMenu =
           <section className='ingredientSection buns'>
             <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Булки</h3>
             <ul className='ingredientList pl-4 pr-4'>
-              <IngredientsList data={props.data} type="bun" ingredientClickHandler = {props.ingredientClickHandler}/>
+              <IngredientsList data={props.data} type="bun" ingredientClickHandler = {props.ingredientClickHandler} setIngredientInModal={props.setIngredientInModal}/>
             </ul>
           </section>
           <section className='ingredientSection sauces'>

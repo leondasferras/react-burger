@@ -4,7 +4,7 @@ import icon from '../../images/stroke-icon.svg'
 const OrderDetails = () => {
 
   return (
-    <div className={styles.orderDetails}>
+    <div className={`${styles.orderDetails} pb-15`}>
       <span className={`${styles.orderNumber} text text_type_digits-large mb-8`}> 345232</span>
       <span className ={'text text_type_main-medium mb-15'}>идентификатор заказа</span>
       <img className='mb-15' src={icon} alt='Заказ подтвержден'></img>

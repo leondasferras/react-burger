@@ -1,28 +1,29 @@
 import styles from './IngredientsDetails.module.css'
 import icon from '../../images/stroke-icon.svg'
 
-const IngredientDetails = () => {
+const IngredientDetails = (props) => {
 
   return (
     <div className={styles.IngredientDetails}>
-      <img src="" alt="" />
-      <span></span>
-      <div className='nutritionalValueGrid'></div>
-        <div className="gridItem cals">
-          <span className='name'>Калории,ккал</span>
-          <span className='value'></span>
+      <img className='mb-4' src={props.ingredientData.image_large} alt={props.ingredientData.name} />
+      <span className='text text_type_main-medium mb-8'>{props.ingredientData.name}</span>
+      <div className={styles.nutritionalValueGrid}>
+        <div className={styles.gridItem}>
+          <p className="text text_type_main-default text_color_inactive">Калории,ккал</p>
+          <p className='text text_type_digits-default text_color_inactive'>{props.ingredientData.calories}</p>
         </div>
-        <div className="gridItem proteins">
-          <span className='name'>Белки, г</span>
-          <span className='value'></span>
+        <div className={styles.gridItem}>
+          <p className='text text_type_main-default text_color_inactive'>Белки, г</p>
+          <p className='text text_type_digits-default text_color_inactive'>{props.ingredientData.proteins}</p>
         </div>
-        <div className="gridItem fats">
-          <span className='name'>Жиры, г</span>
-          <span className='value'></span>
+        <div className={styles.gridItem}>
+          <p className='text text_type_main-default text_color_inactive'>Жиры, г</p>
+          <p className='text text_type_digits-default text_color_inactive'>{props.ingredientData.fat}</p>
         </div>
-        <div className="gridItem carbs">
-          <span className='name'>Углеводы, г</span>
-          <span className='value'></span>
+        <div className={styles.gridItem}>
+          <p className='text text_type_main-default text_color_inactive'>Углеводы, г</p>
+          <p className='text text_type_digits-default text_color_inactive'>{props.ingredientData.carbohydrates}</p>
+        </div>
         </div>
     </div>
   )
