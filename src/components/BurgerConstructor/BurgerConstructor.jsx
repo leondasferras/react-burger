@@ -4,12 +4,12 @@ import {
   Button,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
 import styles from "./BurgerConstructor.module.css";
+import PropTypes from 'prop-types';
 
 export const BurgerConstructor = (props) => {
   return (
-    <section className={`${styles.constructor} mt-25 ml-10`}>
+    <section className={`${styles.constructor} mt-15 ml-10`}>
       <div className={`${styles.item} ml-8`}>
         <ConstructorElement
           type="top"
@@ -59,4 +59,8 @@ export const BurgerConstructor = (props) => {
       </div>
     </section>
   );
+};
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object)
 };

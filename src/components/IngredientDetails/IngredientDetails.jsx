@@ -1,5 +1,5 @@
 import styles from './IngredientsDetails.module.css'
-import icon from '../../images/stroke-icon.svg'
+import { ingredientPropType } from "../../utils/prop-types.js";
 
 const IngredientDetails = (props) => {
 
@@ -28,5 +28,10 @@ const IngredientDetails = (props) => {
     </div>
   )
 }
+
+IngredientDetails.propTypes = {
+  ingredientData: ingredientPropType,
+};
+
 
 export {IngredientDetails}

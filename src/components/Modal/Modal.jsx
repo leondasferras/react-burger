@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { ModalOverlay } from '../ModalOverlay/ModalOverlay.jsx'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './Modal.module.css'
+import PropTypes from 'prop-types';
 
 
 
@@ -33,6 +34,13 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
     </>,
     modalsContainer 
   );
+};
+
+Modal.propTypes = {
+  title: PropTypes.string,
+  onOverlayClick: PropTypes.func,
+  onEscKeydown: PropTypes.func,
+  children: PropTypes.element.isRequired
 };
 
 export {Modal}

@@ -9,13 +9,13 @@ const TabMenu =
     const [current, setCurrent] = React.useState('one')
     return (
       <section style={{ display: 'flex' }}>
-        <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+        <Tab value="buns" active={current === 'buns'} onClick={setCurrent}>
           Булки
         </Tab>
-        <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+        <Tab value="sauses" active={current === 'sauses'} onClick={setCurrent}>
           Соусы
         </Tab>
-        <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+        <Tab value="main" active={current === 'main'} onClick={setCurrent}>
           Начинки
         </Tab>
       </section>
@@ -30,19 +30,19 @@ const TabMenu =
         <TabMenu/>
         <div className={styles.ingredientsWrapper}>
           <section className='ingredientSection buns'>
-            <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Булки</h3>
+            <h3 className={`${styles.ingredientheader} mb-6 mt-10 text text_type_main-medium`}>Булки</h3>
             <ul className='ingredientList pl-4 pr-4'>
               <IngredientsList data={props.data} type="bun" ingredientClickHandler = {props.ingredientClickHandler} setIngredientInModal={props.setIngredientInModal}/>
             </ul>
           </section>
           <section className='ingredientSection sauces'>
-            <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Соусы</h3>
+            <h3 className={`${styles.ingredientheader} mb-6 mt-10 text text_type_main-medium`}>Соусы</h3>
             <ul className='ingredientList pl-4 pr-4'>
               <IngredientsList data={props.data} type='sauce' ingredientClickHandler = {props.ingredientClickHandler}/>
             </ul>
           </section>
           <section className='ingredientSection main'>
-           <h3 className={`${styles.ingredientheader} mb-6 mt-10`}>Начинки</h3>
+           <h3 className={`${styles.ingredientheader} mb-6 mt-10 text text_type_main-medium`}>Начинки</h3>
            <ul className='ingredientList pl-4 pr-4'>
               <IngredientsList data={props.data} type='main' ingredientClickHandler = {props.ingredientClickHandler}/>
             </ul>

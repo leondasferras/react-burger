@@ -16,9 +16,11 @@
 }
 
 .gridItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content;
+  gap: 10px;
+  justify-items: center;
 }
 
 .name {

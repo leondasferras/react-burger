@@ -4,11 +4,15 @@ import {
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Ingredient.module.css";
+import { ingredientPropType } from "../../../../utils/prop-types.js";
 
 export const Ingredient = (props) => {
   const [info, setInfo] = useState(props.data);
   return (
-    <li onClick ={() => props.clickHandler(info)} className={styles.ingredientItem}>
+    <li
+      onClick={() => props.clickHandler(info)}
+      className={styles.ingredientItem}
+    >
       <img className="pl-4 pr-4" src={info.image}></img>
       <section className={`${styles.price} mt-1 mb-1`}>
         <span className="text text_type_digits-default mr-2">{info.price}</span>
@@ -22,4 +26,8 @@ export const Ingredient = (props) => {
       <Counter count={1} size="small" />
     </li>
   );
+};
+
+Ingredient.propTypes = {
+  data: ingredientPropType,
 };
