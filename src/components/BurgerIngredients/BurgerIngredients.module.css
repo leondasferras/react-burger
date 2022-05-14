@@ -1,0 +1,28 @@
+.ingredients {
+    width: 610px;
+    height: 750px;
+}
+
+.ingredientheader {
+ text-align: start;
+}
+
+.sectionHeader {
+    text-align: start;
+}
+
+.ingredientsWrapper {
+    overflow-y: scroll;
+    scrollbar-color: rgb(117, 104, 130);
+    height: 100%;
+  }
+
+
+.ingredientsWrapper::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgba(47, 47, 55, 1);
+}
+
+.ingredientsWrapper::-webkit-scrollbar-thumb {
+    background: rgba(133, 133, 173, 1);
+}
