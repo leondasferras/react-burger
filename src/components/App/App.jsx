@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./App.module.css";
-import { AppHeader } from "./components/AppHeader/AppHeader.jsx";
-import { BurgerIngredients } from "./components/BurgerIngredients/BurgerIngredients.jsx";
-import { BurgerConstructor } from "./components/BurgerConstructor/BurgerConstructor.jsx";
-import { Modal } from "./components/Modal/Modal.jsx";
-import { OrderDetails } from "./components/OrderDetails/OrderDetails.jsx";
-import { IngredientDetails } from "./components/IngredientDetails/IngredientDetails.jsx";
+import { AppHeader } from "../AppHeader/AppHeader.jsx";
+import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients.jsx";
+import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor.jsx";
+import { Modal } from "../Modal/Modal.jsx";
+import { OrderDetails } from "../OrderDetails/OrderDetails.jsx";
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails.jsx";
 
 
 function App() {
