@@ -7,6 +7,7 @@ import { Modal } from "./components/Modal/Modal.jsx";
 import { OrderDetails } from "./components/OrderDetails/OrderDetails.jsx";
 import { IngredientDetails } from "./components/IngredientDetails/IngredientDetails.jsx";
 
+
 function App() {
   const [state, setState] = useState({ data: [] });
   useEffect(() => {
