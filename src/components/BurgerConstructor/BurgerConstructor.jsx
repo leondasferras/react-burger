@@ -11,12 +11,13 @@ import { IngredientsContext, orderDetailsContext } from "../../utils/context";
 
 export const BurgerConstructor = (props) => {
   const ingredients = useContext(IngredientsContext);
-  
   const [orderDetails, setOrderDetails] = useContext(orderDetailsContext);
 
-  const ingredientsToRender = ingredients.filter((item) => item.type !== "bun");
-  const bun = ingredients.find((item) => item.type == "bun");
+  const ingredientsToRender = ingredients.filter((item) => item.type !== "bun"); // Фильтруем массив от булок
+  const bun = ingredients.find((item) => item.type == "bun"); // Получаем одну булку
 
+
+  // Создаем объект с массивом из id иннгредиентов
   let idArray;
   const getIngredientsToCheckout = () => {
     if (ingredientsToRender) {
@@ -34,6 +35,8 @@ export const BurgerConstructor = (props) => {
     };
   };
 
+
+  //Считаем конечную стоимость
   const getTotalPrice = () => {
     let totalPrice = 0;
     ingredientsToRender.forEach((element) => {
@@ -43,6 +46,8 @@ export const BurgerConstructor = (props) => {
     return totalPrice;
   };
 
+
+  // Отправляем на свервер массив с ингредиентами и записывеам ответ в контекст
   const checkOut = (ingredients) => {
     fetch("https://norma.nomoreparties.space/api/orders", {
       method: "POST",

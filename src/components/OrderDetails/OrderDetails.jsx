@@ -5,7 +5,7 @@ import { orderDetailsContext } from "../../utils/context";
 
 const OrderDetails = () => {
 
-  const [orderDetails, setOrderDetails] = useContext(orderDetailsContext);
+  const [orderDetails, setOrderDetails] = useContext(orderDetailsContext); //Берем из контекста номер заказа
   return (
     orderDetails && <div className={`${styles.orderDetails} pb-15`}>
       <span className={`${styles.orderNumber} text text_type_digits-large mb-8`}> {orderDetails.order.number}</span>

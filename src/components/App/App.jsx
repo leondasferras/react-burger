@@ -13,7 +13,7 @@ import { orderDetailsContext } from '../../utils/context.js'
 
 function App() {
   const [state, setState] = useState({ data: [] });
-  const orderDetails = useState()
+  const orderDetails = useState() 
 
   useEffect(() => {
     const apiUrl = "https://norma.nomoreparties.space/api/ingredients";
