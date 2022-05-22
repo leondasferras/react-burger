@@ -5,22 +5,74 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { useContext } from "react";
+import { IngredientsContext, orderDetailsContext } from "../../utils/context";
 
 export const BurgerConstructor = (props) => {
+  const ingredients = useContext(IngredientsContext);
+  
+  const [orderDetails, setOrderDetails] = useContext(orderDetailsContext);
+
+  const ingredientsToRender = ingredients.filter((item) => item.type !== "bun");
+  const bun = ingredients.find((item) => item.type == "bun");
+
+  let idArray;
+  const getIngredientsToCheckout = () => {
+    if (ingredientsToRender) {
+      idArray = ingredientsToRender.map((item) => {
+        return item._id;
+      });
+    }
+
+    if (bun) {
+      idArray.push(bun._id);
+    }
+
+    return {
+      ingredients: idArray,
+    };
+  };
+
+  const getTotalPrice = () => {
+    let totalPrice = 0;
+    ingredientsToRender.forEach((element) => {
+      totalPrice += element.price;
+    });
+    if (bun) totalPrice += bun.price * 2;
+    return totalPrice;
+  };
+
+  const checkOut = (ingredients) => {
+    fetch("https://norma.nomoreparties.space/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ingredients),
+    }).then((res) => {
+      return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+    }).then ((res) => {
+      if(res.success) setOrderDetails(res)
+    })
+    .catch (()=> console.log("Ошибка при оформлении"))
+  };
+
   return (
     <section className={`${styles.constructor} mt-15 ml-10`}>
-      <div className={`${styles.item} ml-8`}>
-        <ConstructorElement
-          type="top"
-          isLocked="true"
-          text={"Краторная булка N-200i"}
-          price={"1255"}
-          thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
-        />
-      </div>
+      {bun && (
+        <div className={`${styles.item} ml-8`}>
+          <ConstructorElement
+            type="top"
+            isLocked="true"
+            text={`${bun.name} (верх)`}
+            price={bun.price}
+            thumbnail={bun.image}
+          />
+        </div>
+      )}
       <ul className={`${styles.itemsWrapper} pl-2 pr-2`}>
-        {props.data.map((item) => {
+        {ingredientsToRender.map((item) => {
           return (
             <li className={styles.item} key={item._id}>
               <div className="mr-1">
@@ -37,23 +89,32 @@ export const BurgerConstructor = (props) => {
           );
         })}
       </ul>
-      <div className={`${styles.item} ml-8`}>
-        <ConstructorElement
-          type="bottom"
-          isLocked="true"
-          text={"Краторная булка N-200i"}
-          price={"1255"}
-          thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
-        />
-      </div>
+      {bun && (
+        <div className={`${styles.item} ml-8`}>
+          <ConstructorElement
+            type="bottom"
+            isLocked="true"
+            text={`${bun.name} (низ)`}
+            price={bun.price}
+            thumbnail={bun.image}
+          />
+        </div>
+      )}
       <div className={`${styles.totalAndButton} mt-10`}>
         <div className={`${styles.total} mr-10`}>
           <span className={`${styles.total}text text_type_digits-medium mr-2`}>
-            2000
+            {getTotalPrice()}
           </span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button onClick={props.buttonHandler} type="primary" size="large">
+        <Button
+          onClick={() => {
+            props.buttonHandler();
+            checkOut(getIngredientsToCheckout());
+          }}
+          type="primary"
+          size="large"
+        >
           Оформить заказ
         </Button>
       </div>
@@ -62,5 +123,5 @@ export const BurgerConstructor = (props) => {
 };
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object)
+  data: PropTypes.arrayOf(PropTypes.object),
 };
