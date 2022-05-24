@@ -1,11 +1,11 @@
 import styles from './OrderDetails.module.css'
 import icon from '../../images/stroke-icon.svg'
 import { useContext } from "react";
-import { orderDetailsContext } from "../../utils/context";
+import { orderDetailsContext } from "../../services/context";
 
 const OrderDetails = () => {
 
-  const [orderDetails, setOrderDetails] = useContext(orderDetailsContext); //Берем из контекста номер заказа
+  const orderDetails = useContext(orderDetailsContext); //Берем из контекста номер заказа
   return (
     orderDetails && <div className={`${styles.orderDetails} pb-15`}>
       <span className={`${styles.orderNumber} text text_type_digits-large mb-8`}> {orderDetails.order.number}</span>

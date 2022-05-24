@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './BurgerIngredients.module.css';
 import {IngredientsList} from './IngredientsList/IngredientsList.jsx'
+import {ingredientPropType} from '../../utils/prop-types.js'
 
 
 
@@ -56,5 +57,7 @@ const TabMenu =
 
   }
 BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.object)
+    data: PropTypes.arrayOf(ingredientPropType),
+    ingredientClickHandler:PropTypes.func,
+    setIngredientInModal:PropTypes.func
 };

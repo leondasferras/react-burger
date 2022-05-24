@@ -6,14 +6,14 @@ import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor.jsx";
 import { Modal } from "../Modal/Modal.jsx";
 import { OrderDetails } from "../OrderDetails/OrderDetails.jsx";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails.jsx";
-import { IngredientsContext } from '../../utils/context.js'
-import { orderDetailsContext } from '../../utils/context.js'
+import { IngredientsContext } from '../../services/context.js'
+import { orderDetailsContext } from '../../services/context.js'
 
 
 
 function App() {
   const [state, setState] = useState({ data: [] });
-  const orderDetails = useState() 
+   const [orderDetails, setOrderDetails] = useState()
 
   useEffect(() => {
     const apiUrl = "https://norma.nomoreparties.space/api/ingredients";
@@ -65,7 +65,7 @@ function App() {
             ingredientClickHandler={ingredientClickHandler}
             setIngredientInModal={setIngredientInModal}
           />
-          <BurgerConstructor buttonHandler={buttonHandler} />
+          <BurgerConstructor buttonHandler={buttonHandler} setOrderDetails={setOrderDetails} />
         </IngredientsContext.Provider>
         
         

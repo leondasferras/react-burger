@@ -7,12 +7,11 @@ import {
 import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import { IngredientsContext, orderDetailsContext } from "../../utils/context";
+import { IngredientsContext, orderDetailsContext } from "../../services/context";
 
 export const BurgerConstructor = (props) => {
   const ingredients = useContext(IngredientsContext);
-  const [orderDetails, setOrderDetails] = useContext(orderDetailsContext);
-
+ 
   const ingredientsToRender = ingredients.filter((item) => item.type !== "bun"); // Фильтруем массив от булок
   const bun = ingredients.find((item) => item.type == "bun"); // Получаем одну булку
 
@@ -58,7 +57,7 @@ export const BurgerConstructor = (props) => {
     }).then((res) => {
       return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
     }).then ((res) => {
-      if(res.success) setOrderDetails(res)
+      if(res.success) props.setOrderDetails(res)
     })
     .catch (()=> console.log("Ошибка при оформлении"))
   };
@@ -128,5 +127,6 @@ export const BurgerConstructor = (props) => {
 };
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+  buttonHandler: PropTypes.func,
+  setOrderDetails: PropTypes.func
 };
