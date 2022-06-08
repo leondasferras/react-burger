@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { rootReducer } from '../../services/reducers/root'
+
+
+
 import styles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader.jsx";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients.jsx";
@@ -10,6 +16,7 @@ import { IngredientsContext } from '../../services/context.js'
 import { orderDetailsContext } from '../../services/context.js'
 
 
+const store = createStore(rootReducer)
 
 function App() {
   const [state, setState] = useState({ data: [] });
@@ -53,45 +60,47 @@ function App() {
   };
 
   return (
-    <div className={styles.App}>
-      <AppHeader />
-      <orderDetailsContext.Provider value = {orderDetails}>
-      <main className={styles.main}>
+      <Provider store = {store}>
+        <div className={styles.App}>
+          <AppHeader/>
+          <orderDetailsContext.Provider value={orderDetails}>
+            <main className={styles.main}>
 
-      
-        <IngredientsContext.Provider value = {state.data}>
-          <BurgerIngredients
-            data={state.data}
-            ingredientClickHandler={ingredientClickHandler}
-            setIngredientInModal={setIngredientInModal}
-          />
-          <BurgerConstructor buttonHandler={buttonHandler} setOrderDetails={setOrderDetails} />
-        </IngredientsContext.Provider>
-        
-        
-        </main>
-        {isOrderDetailsOpened && (
-          <Modal
-            title=" "
-            onOverlayClick={closeAllModals}
-            onEscKeydown={handleEscKeydown}
-          >
-            <OrderDetails />
-          </Modal>
-      
-      )}
-            </orderDetailsContext.Provider>
-      {ingredientInModal && (
-        <Modal
-          title="Детали ингредиента"
-          onOverlayClick={closeAllModals}
-          onEscKeydown={handleEscKeydown}
-        >
-          <IngredientDetails ingredientData={ingredientInModal} />
-        </Modal>
-      )}
 
-    </div>
+              <IngredientsContext.Provider value={state.data}>
+                <BurgerIngredients
+                    data={state.data}
+                    ingredientClickHandler={ingredientClickHandler}
+                    setIngredientInModal={setIngredientInModal}
+                />
+                <BurgerConstructor buttonHandler={buttonHandler} setOrderDetails={setOrderDetails}/>
+              </IngredientsContext.Provider>
+
+
+            </main>
+            {isOrderDetailsOpened && (
+                <Modal
+                    title=" "
+                    onOverlayClick={closeAllModals}
+                    onEscKeydown={handleEscKeydown}
+                >
+                  <OrderDetails/>
+                </Modal>
+
+            )}
+          </orderDetailsContext.Provider>
+          {ingredientInModal && (
+              <Modal
+                  title="Детали ингредиента"
+                  onOverlayClick={closeAllModals}
+                  onEscKeydown={handleEscKeydown}
+              >
+                <IngredientDetails ingredientData={ingredientInModal}/>
+              </Modal>
+          )}
+
+        </div>
+      </Provider>
     
   );
 }
