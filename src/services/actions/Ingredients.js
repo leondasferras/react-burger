@@ -5,11 +5,11 @@ export function getIngredients () {
     return function(dispatch) {
         dispatch({
             type: GET_INGREDIENTS
-        })
-
+        });
         fetch("https://norma.nomoreparties.space/api/ingredients")
+        .then(res => res.json())
             .then((res) => {
-               if (res && res.ok) {
+               if (res && res.success) {
                    dispatch({
                        type: GET_INGREDIENTS_SUCCESS,
                        payload: res.data

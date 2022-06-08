@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { rootReducer } from '../../services/reducers/root'
+import {createStore, applyMiddleware, compose}  from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+import thunk from "redux-thunk";
+
 
 
 
@@ -14,15 +15,20 @@ import { OrderDetails } from "../OrderDetails/OrderDetails.jsx";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails.jsx";
 import { IngredientsContext } from '../../services/context.js'
 import { orderDetailsContext } from '../../services/context.js'
+import {getIngredients} from '../../services/actions/Ingredients'
 
 
-const store = createStore(rootReducer)
 
 function App() {
+
+  const dispatch = useDispatch();
+  const allIngredients = useSelector(store => store.ingredients)
+
   const [state, setState] = useState({ data: [] });
    const [orderDetails, setOrderDetails] = useState()
 
   useEffect(() => {
+    dispatch(getIngredients())
     const apiUrl = "https://norma.nomoreparties.space/api/ingredients";
     const getIngredientsData = () => {
       fetch(apiUrl)
@@ -34,6 +40,7 @@ function App() {
     };
     getIngredientsData();
   }, []);
+
 
  
   const [ingredientInModal, setIngredientInModal] = React.useState(null);
@@ -60,7 +67,7 @@ function App() {
   };
 
   return (
-      <Provider store = {store}>
+
         <div className={styles.App}>
           <AppHeader/>
           <orderDetailsContext.Provider value={orderDetails}>
@@ -69,7 +76,7 @@ function App() {
 
               <IngredientsContext.Provider value={state.data}>
                 <BurgerIngredients
-                    data={state.data}
+
                     ingredientClickHandler={ingredientClickHandler}
                     setIngredientInModal={setIngredientInModal}
                 />
@@ -100,7 +107,7 @@ function App() {
           )}
 
         </div>
-      </Provider>
+
     
   );
 }

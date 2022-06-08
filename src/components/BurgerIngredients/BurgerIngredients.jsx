@@ -35,19 +35,19 @@ const TabMenu =
           <section className='ingredientSection buns'>
             <h3 className={`${styles.ingredientheader} mb-6 mt-10 text text_type_main-medium`}>Булки</h3>
             <ul className='ingredientList pl-4 pr-4'>
-              <IngredientsList data={props.data} type="bun" ingredientClickHandler = {props.ingredientClickHandler} setIngredientInModal={props.setIngredientInModal}/>
+              <IngredientsList  type="bun" ingredientClickHandler = {props.ingredientClickHandler} setIngredientInModal={props.setIngredientInModal}/>
             </ul>
           </section>
           <section className='ingredientSection sauces'>
             <h3 className={`${styles.ingredientheader} mb-6 mt-10 text text_type_main-medium`}>Соусы</h3>
             <ul className='ingredientList pl-4 pr-4'>
-              <IngredientsList data={props.data} type='sauce' ingredientClickHandler = {props.ingredientClickHandler}/>
+              <IngredientsList  type='sauce' ingredientClickHandler = {props.ingredientClickHandler}/>
             </ul>
           </section>
           <section className='ingredientSection main'>
            <h3 className={`${styles.ingredientheader} mb-6 mt-10 text text_type_main-medium`}>Начинки</h3>
            <ul className='ingredientList pl-4 pr-4'>
-              <IngredientsList data={props.data} type='main' ingredientClickHandler = {props.ingredientClickHandler}/>
+              <IngredientsList type='main' ingredientClickHandler = {props.ingredientClickHandler}/>
             </ul>
           </section>
         </div>
