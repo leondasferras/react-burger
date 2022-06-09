@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {createStore, applyMiddleware, compose}  from 'redux';
+
 import { useDispatch, useSelector } from 'react-redux';
-import thunk from "redux-thunk";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 
 import styles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader.jsx";
