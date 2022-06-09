@@ -7,9 +7,13 @@ import {
 import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
 import { useContext } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { IngredientsContext, orderDetailsContext } from "../../services/context";
+import { order } from '../../services/actions/order'
 
 export const BurgerConstructor = (props) => {
+
+  const dispatch = useDispatch();
   const ingredients = useContext(IngredientsContext);
  
   const ingredientsToRender = ingredients.filter((item) => item.type !== "bun"); // Фильтруем массив от булок
@@ -48,18 +52,7 @@ export const BurgerConstructor = (props) => {
 
   // Отправляем на свервер массив с ингредиентами и записывеам ответ в контекст
   const checkOut = (ingredients) => {
-    fetch("https://norma.nomoreparties.space/api/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(ingredients),
-    }).then((res) => {
-      return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-    }).then ((res) => {
-      if(res.success) props.setOrderDetails(res)
-    })
-    .catch (()=> console.log("Ошибка при оформлении"))
+    dispatch(order(getIngredientsToCheckout()))
   };
 
   return (

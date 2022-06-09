@@ -3,9 +3,6 @@ import {createStore, applyMiddleware, compose}  from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import thunk from "redux-thunk";
 
-
-
-
 import styles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader.jsx";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients.jsx";
@@ -16,13 +13,14 @@ import { IngredientDetails } from "../IngredientDetails/IngredientDetails.jsx";
 import { IngredientsContext } from '../../services/context.js'
 import { orderDetailsContext } from '../../services/context.js'
 import {getIngredients} from '../../services/actions/Ingredients'
+import {INGREDIENT_MODAL_SET, INGREDIENT_MODAL_DELETE} from '../../services/types'
 
 
 
 function App() {
 
   const dispatch = useDispatch();
-  const allIngredients = useSelector(store => store.ingredients)
+
 
   const [state, setState] = useState({ data: [] });
    const [orderDetails, setOrderDetails] = useState()
@@ -43,7 +41,7 @@ function App() {
 
 
  
-  const [ingredientInModal, setIngredientInModal] = React.useState(null);
+
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
 
   //Клик по кнопке "Оформить заказ"
@@ -52,13 +50,14 @@ function App() {
 
   //Клик по ингредиенту
   const ingredientClickHandler = (data) => {
-    setIngredientInModal(data);
+    dispatch({type:INGREDIENT_MODAL_SET, payload: data})
   };
 
   // Закрытие всех модалок
   const closeAllModals = () => {
     setIsOrderDetailsOpened(false);
-    setIngredientInModal(null);
+   
+    dispatch({type:INGREDIENT_MODAL_DELETE})
   };
 
   // Обработка нажатия Esc
@@ -66,6 +65,8 @@ function App() {
     e.key === "Escape" && closeAllModals();
   };
 
+
+  const ingredientData = useSelector(store => store.ingredientInModal.ingredient)
   return (
 
         <div className={styles.App}>
@@ -78,7 +79,7 @@ function App() {
                 <BurgerIngredients
 
                     ingredientClickHandler={ingredientClickHandler}
-                    setIngredientInModal={setIngredientInModal}
+
                 />
                 <BurgerConstructor buttonHandler={buttonHandler} setOrderDetails={setOrderDetails}/>
               </IngredientsContext.Provider>
@@ -96,13 +97,13 @@ function App() {
 
             )}
           </orderDetailsContext.Provider>
-          {ingredientInModal && (
+          {ingredientData && (
               <Modal
                   title="Детали ингредиента"
                   onOverlayClick={closeAllModals}
                   onEscKeydown={handleEscKeydown}
               >
-                <IngredientDetails ingredientData={ingredientInModal}/>
+                <IngredientDetails/>
               </Modal>
           )}
 
