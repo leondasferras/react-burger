@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDrag } from "react-dnd";
+import { useDispatch, useSelector } from 'react-redux';
 import {
   CurrencyIcon,
   Counter,
@@ -9,8 +10,25 @@ import { ingredientPropType } from "../../../../utils/prop-types.js";
 
 export const Ingredient = (props) => {
   const [info, setInfo] = useState(props.data);
+  // const bun = useSelector(store => 
+  //   store.constructors?.bun?._id) 
+
+  // let quantity
+  // quantity = useSelector(store => 
+  //   store.constructors.ingredients.filter(item => item._id===info._id).length)
+
+  //  if (info._id === bun) {
+  //   quantity = 1
+  //  }
+  //  else { quantity = 0}
+
+  const qty = useSelector(store => 
+    store.constructors.ingredients.filter(item => item._id===info._id).length
+  );
   
-  
+
+
+
   const [, dragRef] = useDrag({
     type: 'ingredient',
     item: info
@@ -31,7 +49,7 @@ export const Ingredient = (props) => {
       >
         {info.name}
       </h4>
-      <Counter count={0} size="small" />
+      { qty? <Counter count={qty} size="small" />: null}
     </li>
   );
 };

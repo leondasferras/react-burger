@@ -4,7 +4,8 @@ import {GET_INGREDIENTS, GET_INGREDIENTS_ERROR, GET_INGREDIENTS_SUCCESS} from ".
 const initialState = {
     ingredients: [],
     isLoading: false,
-    isError: false
+    isError: false,
+
     }
 
 
@@ -18,7 +19,8 @@ const initialState = {
          case GET_INGREDIENTS_SUCCESS:
              return {
                  ...state,
-                 ingredients: action.payload,
+                 ingredients: action.payload.ingredients,
+                 qty: action.payload.qtyObject,
                  isLoading: false
              }
          case GET_INGREDIENTS_ERROR:

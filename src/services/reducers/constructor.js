@@ -5,27 +5,31 @@ import {CONSTRUCTOR_ADD,
 
 const initialState = {
   ingredients: [],
-  bun: {}
+  bun: null
 }
 
 
 export const constructors = (state = initialState, action) => {
   switch (action.type) {
     case CONSTRUCTOR_ADD:
-      return {
-        ...state,
-        ingredients: [...state.ingredients, action.payload]
-      }
+      if (action.payload.type !== "bun")
+        {return {
+          ...state,
+          ingredients: [...state.ingredients, action.payload]
+        }}
+      else if (state.bun && state.bun._id === action.payload._id) {return {...state}} 
+      else {return {...state, bun: action.payload}}
+      
 
     case CONSTRUCTOR_DELETE:
       return {
         ...state,
-        ingredients: state.ingredients.filter( item => item.id !== action.payload)
+        ingredients: state.ingredients.filter( item => item.uid !== action.payload)
       }
 
     case CONSTRUCTOR_RESET: 
       return {
-       initialState
+       ...initialState
       }
       default:
         return state

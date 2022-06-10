@@ -12,7 +12,10 @@ export function getIngredients () {
                if (res && res.success) {
                    dispatch({
                        type: GET_INGREDIENTS_SUCCESS,
-                       payload: res.data
+                       payload: {
+                         ingredients: res.data,
+                         qtyObject: res.data.map(ingredient => ({id:ingredient._id, qty: 0}) )
+                      }
                    })
                }
                else {

@@ -11,30 +11,38 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IngredientsContext, orderDetailsContext } from "../../services/context";
 import { order } from '../../services/actions/order';
 import { useDrop } from "react-dnd";
-
+import { CONSTRUCTOR_DELETE, CONSTRUCTOR_RESET} from "../../services/types";
 import { addIngredient } from "../../services/actions/constructor";
 
 export const BurgerConstructor = (props) => {
 
   const dispatch = useDispatch();
-  const ingredients = useSelector(store => store.constructors.ingredients);
+  const ingredients = useSelector(store => store.constructors.ingredients)
+
+
 
   const handleDropIngredient = (ingredientData) => {
-    dispatch(addIngredient(ingredientData))
+    dispatch(addIngredient({...ingredientData, uid:Math.random().toString(36).slice(2)}))
+
+  }
+
+  const handleDeleteItem = (id) => {
+    dispatch({type:CONSTRUCTOR_DELETE, payload:id})
   }
 
 
   const [, dropTarget] = useDrop({
     accept: 'ingredient',
     drop(item) {
+
       handleDropIngredient(item)
-      console.log(item)
     }
   })
 
  
   const ingredientsToRender = ingredients.filter((item) => item.type !== "bun"); // Фильтруем массив от булок
-  const bun = ingredients.find((item) => item.type == "bun"); // Получаем одну булку
+  const bun = useSelector(store => store.constructors.bun)
+
 
 
   // Создаем объект с массивом из id иннгредиентов
@@ -70,6 +78,7 @@ export const BurgerConstructor = (props) => {
   // Отправляем на свервер массив с ингредиентами и записывеам ответ в контекст
   const checkOut = (ingredients) => {
     dispatch(order(getIngredientsToCheckout()))
+    dispatch({type:CONSTRUCTOR_RESET})
   };
 
   return (
@@ -90,7 +99,7 @@ export const BurgerConstructor = (props) => {
       className={`${styles.itemsWrapper} pl-2 pr-2`}>
         {ingredientsToRender.map((item) => {
           return (
-            <li className={styles.item} key={item._id}>
+            <li className={styles.item} key={item.uid}>
               <div className="mr-1">
                 <DragIcon type="pimary" />
               </div>
@@ -100,6 +109,7 @@ export const BurgerConstructor = (props) => {
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image}
+                handleClose={()=>handleDeleteItem(item.uid)}
               />
             </li>
           );
@@ -113,6 +123,7 @@ export const BurgerConstructor = (props) => {
             text={`${bun.name} (низ)`}
             price={bun.price}
             thumbnail={bun.image}
+            
           />
         </div>
       )}
