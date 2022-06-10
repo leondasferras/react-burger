@@ -27,6 +27,8 @@ const initialState = {
                  isError: true,
                  isLoading: false
              }
+        
+        
          default :
              return state
 
