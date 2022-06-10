@@ -9,12 +9,29 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { IngredientsContext, orderDetailsContext } from "../../services/context";
-import { order } from '../../services/actions/order'
+import { order } from '../../services/actions/order';
+import { useDrop } from "react-dnd";
+
+import { addIngredient } from "../../services/actions/constructor";
 
 export const BurgerConstructor = (props) => {
 
   const dispatch = useDispatch();
-  const ingredients = useContext(IngredientsContext);
+  const ingredients = useSelector(store => store.constructors.ingredients);
+
+  const handleDropIngredient = (ingredientData) => {
+    dispatch(addIngredient(ingredientData))
+  }
+
+
+  const [, dropTarget] = useDrop({
+    accept: 'ingredient',
+    drop(item) {
+      handleDropIngredient(item)
+      console.log(item)
+    }
+  })
+
  
   const ingredientsToRender = ingredients.filter((item) => item.type !== "bun"); // Фильтруем массив от булок
   const bun = ingredients.find((item) => item.type == "bun"); // Получаем одну булку
@@ -56,7 +73,7 @@ export const BurgerConstructor = (props) => {
   };
 
   return (
-    <section className={`${styles.constructor} mt-15 ml-10`}>
+    <section ref = {dropTarget} className={`${styles.constructor} mt-15 ml-10`}>
       {bun && (
         <div className={`${styles.item} ml-8`}>
           <ConstructorElement
@@ -68,7 +85,9 @@ export const BurgerConstructor = (props) => {
           />
         </div>
       )}
-      <ul className={`${styles.itemsWrapper} pl-2 pr-2`}>
+      <ul 
+      
+      className={`${styles.itemsWrapper} pl-2 pr-2`}>
         {ingredientsToRender.map((item) => {
           return (
             <li className={styles.item} key={item._id}>

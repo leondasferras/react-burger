@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDrag } from "react-dnd";
 import {
   CurrencyIcon,
   Counter,
@@ -8,10 +9,17 @@ import { ingredientPropType } from "../../../../utils/prop-types.js";
 
 export const Ingredient = (props) => {
   const [info, setInfo] = useState(props.data);
+  
+  
+  const [, dragRef] = useDrag({
+    type: 'ingredient',
+    item: info
+  })
   return (
     <li
       onClick={() => props.clickHandler(info)}
       className={styles.ingredientItem}
+      ref ={dragRef}
     >
       <img className="pl-4 pr-4" src={info.image}></img>
       <section className={`${styles.price} mt-1 mb-1`}>
@@ -23,7 +31,7 @@ export const Ingredient = (props) => {
       >
         {info.name}
       </h4>
-      <Counter count={1} size="small" />
+      <Counter count={0} size="small" />
     </li>
   );
 };

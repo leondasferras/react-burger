@@ -9,8 +9,7 @@ const initialState = {
 }
 
 
-export const constructor = (state=initialState, action) => {
-
+export const constructors = (state = initialState, action) => {
   switch (action.type) {
     case CONSTRUCTOR_ADD:
       return {
