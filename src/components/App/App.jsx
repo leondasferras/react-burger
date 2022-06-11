@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -11,8 +10,6 @@ import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor.jsx";
 import { Modal } from "../Modal/Modal.jsx";
 import { OrderDetails } from "../OrderDetails/OrderDetails.jsx";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails.jsx";
-import { IngredientsContext } from "../../services/context.js";
-import { orderDetailsContext } from "../../services/context.js";
 import { getIngredients } from "../../services/actions/Ingredients";
 import {
   INGREDIENT_MODAL_SET,
@@ -23,7 +20,6 @@ function App() {
   const dispatch = useDispatch();
 
   const [state, setState] = useState({ data: [] });
-  const [orderDetails, setOrderDetails] = useState();
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -69,30 +65,23 @@ function App() {
   return (
     <div className={styles.App}>
       <AppHeader />
-      <orderDetailsContext.Provider value={orderDetails}>
-        <main className={styles.main}>
-          <IngredientsContext.Provider value={state.data}>
-            <DndProvider backend ={HTML5Backend}>
-              <BurgerIngredients
-                ingredientClickHandler={ingredientClickHandler}
-              />
-              <BurgerConstructor
-                buttonHandler={buttonHandler}
-                setOrderDetails={setOrderDetails}
-              />
-            </DndProvider>
-          </IngredientsContext.Provider>
-        </main>
-        {isOrderDetailsOpened && (
-          <Modal
-            title=" "
-            onOverlayClick={closeAllModals}
-            onEscKeydown={handleEscKeydown}
-          >
-            <OrderDetails />
-          </Modal>
-        )}
-      </orderDetailsContext.Provider>
+
+      <main className={styles.main}>
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients ingredientClickHandler={ingredientClickHandler} />
+          <BurgerConstructor buttonHandler={buttonHandler} />
+        </DndProvider>
+      </main>
+      {isOrderDetailsOpened && (
+        <Modal
+          title=" "
+          onOverlayClick={closeAllModals}
+          onEscKeydown={handleEscKeydown}
+        >
+          <OrderDetails />
+        </Modal>
+      )}
+
       {ingredientData && (
         <Modal
           title="Детали ингредиента"

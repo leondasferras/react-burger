@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import {
   CurrencyIcon,
   Counter,
@@ -10,34 +10,24 @@ import { ingredientPropType } from "../../../../utils/prop-types.js";
 
 export const Ingredient = (props) => {
   const [info, setInfo] = useState(props.data);
-  // const bun = useSelector(store => 
-  //   store.constructors?.bun?._id) 
 
-  // let quantity
-  // quantity = useSelector(store => 
-  //   store.constructors.ingredients.filter(item => item._id===info._id).length)
+  const bun = useSelector((store) => store.constructors?.bun?._id);
 
-  //  if (info._id === bun) {
-  //   quantity = 1
-  //  }
-  //  else { quantity = 0}
-
-  const qty = useSelector(store => 
-    store.constructors.ingredients.filter(item => item._id===info._id).length
+  const qty = useSelector(
+    (store) =>
+      store.constructors.ingredients.filter((item) => item._id === info._id)
+        .length
   );
-  
-
-
 
   const [, dragRef] = useDrag({
-    type: 'ingredient',
-    item: info
-  })
+    type: "ingredient",
+    item: info,
+  });
   return (
     <li
       onClick={() => props.clickHandler(info)}
       className={styles.ingredientItem}
-      ref ={dragRef}
+      ref={dragRef}
     >
       <img className="pl-4 pr-4" src={info.image}></img>
       <section className={`${styles.price} mt-1 mb-1`}>
@@ -49,7 +39,8 @@ export const Ingredient = (props) => {
       >
         {info.name}
       </h4>
-      { qty? <Counter count={qty} size="small" />: null}
+      {info.type !== "bun" && qty ? <Counter count={qty} size="small" /> : null}
+      {info._id === bun ? <Counter count={1} size="small" /> : null}
     </li>
   );
 };

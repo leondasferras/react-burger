@@ -1,6 +1,8 @@
 import {CONSTRUCTOR_ADD, 
       CONSTRUCTOR_DELETE, 
-      CONSTRUCTOR_RESET} from "../types"
+      CONSTRUCTOR_RESET,
+      CONSTRUCTOR_UPDATE
+    } from "../types"
 
 
 const initialState = {
@@ -26,6 +28,15 @@ export const constructors = (state = initialState, action) => {
         ...state,
         ingredients: state.ingredients.filter( item => item.uid !== action.payload)
       }
+
+      case CONSTRUCTOR_UPDATE:
+        const newArr = state.ingredients.slice(0)
+        const dragItem = newArr[action.payload.dragIndex]
+        newArr[action.payload.dragIndex]=newArr[action.payload.hoverIndex]
+        newArr[action.payload.hoverIndex] = dragItem;
+        return {...state,
+          ingredients:newArr
+        }
 
     case CONSTRUCTOR_RESET: 
       return {

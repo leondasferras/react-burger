@@ -9,7 +9,8 @@
   gap: 10px;
   list-style: none;
   overflow-y: scroll;
-  height: 440px;
+  min-height: 70px;
+  max-height: 440px;
   margin: 10px 0;
 
 }

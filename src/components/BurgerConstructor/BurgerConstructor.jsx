@@ -2,54 +2,49 @@ import {
   ConstructorElement,
   CurrencyIcon,
   Button,
-  DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
-import { useContext } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { IngredientsContext, orderDetailsContext } from "../../services/context";
-import { order } from '../../services/actions/order';
-import { useDrop } from "react-dnd";
-import { CONSTRUCTOR_DELETE, CONSTRUCTOR_RESET} from "../../services/types";
+import { useDispatch, useSelector } from "react-redux";
+
+import styles from "./BurgerConstructor.module.css";
+import { order } from "../../services/actions/order";
+import { useDrop, useDrag } from "react-dnd";
+import { CONSTRUCTOR_DELETE, CONSTRUCTOR_RESET } from "../../services/types";
 import { addIngredient } from "../../services/actions/constructor";
+import { ConstructorItem } from "./ConstructorItem/ConstructorItem";
+import { updateConstructor } from "../../services/actions/constructor";
+
 
 export const BurgerConstructor = (props) => {
-
   const dispatch = useDispatch();
-  const ingredients = useSelector(store => store.constructors.ingredients)
-
-
+  const ingredients = useSelector((store) => store.constructors.ingredients);
+  const bun = useSelector((store) => store.constructors.bun);
 
   const handleDropIngredient = (ingredientData) => {
-    dispatch(addIngredient({...ingredientData, uid:Math.random().toString(36).slice(2)}))
-
-  }
+    dispatch(
+      addIngredient({
+        ...ingredientData,
+        uid: Math.random().toString(36).slice(2),
+      })
+    );
+  };
 
   const handleDeleteItem = (id) => {
-    dispatch({type:CONSTRUCTOR_DELETE, payload:id})
-  }
-
+    dispatch({ type: CONSTRUCTOR_DELETE, payload: id });
+  };
 
   const [, dropTarget] = useDrop({
-    accept: 'ingredient',
+    accept: "ingredient",
     drop(item) {
-
-      handleDropIngredient(item)
-    }
-  })
-
- 
-  const ingredientsToRender = ingredients.filter((item) => item.type !== "bun"); // Фильтруем массив от булок
-  const bun = useSelector(store => store.constructors.bun)
-
-
+      handleDropIngredient(item);
+    },
+  });
 
   // Создаем объект с массивом из id иннгредиентов
   let idArray;
   const getIngredientsToCheckout = () => {
-    if (ingredientsToRender) {
-      idArray = ingredientsToRender.map((item) => {
+    if (ingredients) {
+      idArray = ingredients.map((item) => {
         return item._id;
       });
     }
@@ -63,26 +58,31 @@ export const BurgerConstructor = (props) => {
     };
   };
 
-
   //Считаем конечную стоимость
   const getTotalPrice = () => {
     let totalPrice = 0;
-    ingredientsToRender.forEach((element) => {
+    ingredients.forEach((element) => {
       totalPrice += element.price;
     });
     if (bun) totalPrice += bun.price * 2;
     return totalPrice;
   };
 
-
   // Отправляем на свервер массив с ингредиентами и записывеам ответ в контекст
-  const checkOut = (ingredients) => {
-    dispatch(order(getIngredientsToCheckout()))
-    dispatch({type:CONSTRUCTOR_RESET})
+  const checkOut = () => {
+    dispatch(order(getIngredientsToCheckout()));
+    dispatch({ type: CONSTRUCTOR_RESET });
   };
 
-  return (
-    <section ref = {dropTarget} className={`${styles.constructor} mt-15 ml-10`}>
+  //Функционал перетаскивания ингредиентов внутри конструктора
+
+  const moveCard = (dragIndex, hoverIndex) => {
+    dispatch(updateConstructor(dragIndex, hoverIndex));
+  };
+
+  return ( 
+    <section ref={dropTarget} className={`${styles.constructor} mt-15 ml-10`}>
+
       {bun && (
         <div className={`${styles.item} ml-8`}>
           <ConstructorElement
@@ -94,27 +94,21 @@ export const BurgerConstructor = (props) => {
           />
         </div>
       )}
-      <ul 
-      
-      className={`${styles.itemsWrapper} pl-2 pr-2`}>
-        {ingredientsToRender.map((item) => {
+     <ul className={`${styles.itemsWrapper} pl-2 pr-2`}>
+      {ingredients.length || bun? null : <span className="text_type_main-large mt-20">Перетащите ингредиенты сюда</span>}
+        {ingredients.map((item, index) => {
           return (
-            <li className={styles.item} key={item.uid}>
-              <div className="mr-1">
-                <DragIcon type="pimary" />
-              </div>
-              <ConstructorElement
-                type="null"
-                isLocked={false}
-                text={item.name}
-                price={item.price}
-                thumbnail={item.image}
-                handleClose={()=>handleDeleteItem(item.uid)}
-              />
-            </li>
+            <ConstructorItem
+              item={item}
+              handleDelete={handleDeleteItem}
+              index={index}
+              key={item.uid}
+              id={item.uid}
+              moveCard={moveCard}
+            />
           );
         })}
-      </ul>
+      </ul> 
       {bun && (
         <div className={`${styles.item} ml-8`}>
           <ConstructorElement
@@ -123,11 +117,10 @@ export const BurgerConstructor = (props) => {
             text={`${bun.name} (низ)`}
             price={bun.price}
             thumbnail={bun.image}
-            
           />
         </div>
       )}
-      <div className={`${styles.totalAndButton} mt-10`}>
+      { ingredients.length || bun ? <div className={`${styles.totalAndButton} mt-10`}>
         <div className={`${styles.total} mr-10`}>
           <span className={`${styles.total}text text_type_digits-medium mr-2`}>
             {getTotalPrice()}
@@ -144,12 +137,13 @@ export const BurgerConstructor = (props) => {
         >
           Оформить заказ
         </Button>
-      </div>
+      </div> : null}
     </section>
+     
   );
 };
 
 BurgerConstructor.propTypes = {
   buttonHandler: PropTypes.func,
-  setOrderDetails: PropTypes.func
+  setOrderDetails: PropTypes.func,
 };
