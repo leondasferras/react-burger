@@ -14,7 +14,6 @@ import { addIngredient } from "../../services/actions/constructor";
 import { ConstructorItem } from "./ConstructorItem/ConstructorItem";
 import { updateConstructor } from "../../services/actions/constructor";
 
-
 export const BurgerConstructor = (props) => {
   const dispatch = useDispatch();
   const ingredients = useSelector((store) => store.constructors.ingredients);
@@ -80,9 +79,8 @@ export const BurgerConstructor = (props) => {
     dispatch(updateConstructor(dragIndex, hoverIndex));
   };
 
-  return ( 
+  return (
     <section ref={dropTarget} className={`${styles.constructor} mt-15 ml-10`}>
-
       {bun && (
         <div className={`${styles.item} ml-8`}>
           <ConstructorElement
@@ -94,8 +92,12 @@ export const BurgerConstructor = (props) => {
           />
         </div>
       )}
-     <ul className={`${styles.itemsWrapper} pl-2 pr-2`}>
-      {ingredients.length || bun? null : <span className="text_type_main-large mt-20">Перетащите ингредиенты сюда</span>}
+      <ul className={`${styles.itemsWrapper} pl-2 pr-2`}>
+        {ingredients.length || bun ? null : (
+          <span className="text_type_main-large mt-20">
+            Перетащите ингредиенты сюда
+          </span>
+        )}
         {ingredients.map((item, index) => {
           return (
             <ConstructorItem
@@ -108,7 +110,7 @@ export const BurgerConstructor = (props) => {
             />
           );
         })}
-      </ul> 
+      </ul>
       {bun && (
         <div className={`${styles.item} ml-8`}>
           <ConstructorElement
@@ -120,26 +122,29 @@ export const BurgerConstructor = (props) => {
           />
         </div>
       )}
-      { ingredients.length || bun ? <div className={`${styles.totalAndButton} mt-10`}>
-        <div className={`${styles.total} mr-10`}>
-          <span className={`${styles.total}text text_type_digits-medium mr-2`}>
-            {getTotalPrice()}
-          </span>
-          <CurrencyIcon type="primary" />
+      {ingredients.length || bun ? (
+        <div className={`${styles.totalAndButton} mt-10`}>
+          <div className={`${styles.total} mr-10`}>
+            <span
+              className={`${styles.total}text text_type_digits-medium mr-2`}
+            >
+              {getTotalPrice()}
+            </span>
+            <CurrencyIcon type="primary" />
+          </div>
+          <Button
+            onClick={() => {
+              props.buttonHandler();
+              checkOut(getIngredientsToCheckout());
+            }}
+            type="primary"
+            size="large"
+          >
+            Оформить заказ
+          </Button>
         </div>
-        <Button
-          onClick={() => {
-            props.buttonHandler();
-            checkOut(getIngredientsToCheckout());
-          }}
-          type="primary"
-          size="large"
-        >
-          Оформить заказ
-        </Button>
-      </div> : null}
+      ) : null}
     </section>
-     
   );
 };
 

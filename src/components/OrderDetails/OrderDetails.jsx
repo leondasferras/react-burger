@@ -9,12 +9,16 @@ const OrderDetails = () => {
     burgerName: store.order.orderData.name,
     orderNum: store.order.orderData.number,
     isLoading: store.order.isLoading,
-    isError: store.order.isError
+    isError: store.order.isError,
   }));
 
-
-
-  return (isLoading ? <Loader/> : isError ? <span className="text_type_main-large">Ошибка при заказе. Обновите&nbsp;страницу.</span> :
+  return isLoading ? (
+    <Loader />
+  ) : isError ? (
+    <span className="text_type_main-large">
+      Ошибка при заказе. Обновите&nbsp;страницу.
+    </span>
+  ) : (
     <div className={`${styles.orderDetails} pb-15`}>
       <span
         className={`${styles.orderNumber} text text_type_digits-large mb-8`}
@@ -33,7 +37,7 @@ const OrderDetails = () => {
         Дождитесь готовности на орбитальной станции
       </p>
     </div>
-  ) 
+  );
 };
 
 export { OrderDetails };
