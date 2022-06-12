@@ -7,14 +7,17 @@ import PropTypes from "prop-types";
 
 const modalsContainer = document.querySelector("#modals");
 
-const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
+const Modal = ({ title, onClose, children }) => {
   // При монтировании компонента (открытии модалки) навешиваем на document обработчик Esc
   // При демонтаже компонента (закрытии модалки) удаляем обработчик
   React.useEffect(() => {
-    document.addEventListener("keydown", onEscKeydown);
+    const handleEscKeydown = (e) => {
+      e.key === "Escape" && onClose();
+    };
+    document.addEventListener("keydown", handleEscKeydown);
 
     return () => {
-      document.removeEventListener("keydown", onEscKeydown);
+      document.removeEventListener("keydown", handleEscKeydown);
     };
   }, []);
 
@@ -24,13 +27,13 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
       <div className={`${styles.modal} pt-15 pr-10 pb-15 pl-10`}>
         <div className={styles.titleAndCloseButton}>
           <h3 className="text text_type_main-large">{title}</h3>
-          <div className={styles.closeButton} onClick={() => onOverlayClick()}>
+          <div className={styles.closeButton} onClick={() => onClose()}>
             <CloseIcon />
           </div>
         </div>
         {children}
       </div>
-      <ModalOverlay onClick={onOverlayClick} />
+      <ModalOverlay onClick={() => onClose()} />
     </>,
     modalsContainer
   );

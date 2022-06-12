@@ -23,16 +23,6 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients());
-    const apiUrl = "https://norma.nomoreparties.space/api/ingredients";
-    const getIngredientsData = () => {
-      fetch(apiUrl)
-        .then((res) => {
-          return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-        })
-        .then((res) => setState({ data: res.data }))
-        .catch(() => console.log("Ошибка при запросе с сервера!"));
-    };
-    getIngredientsData();
   }, []);
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
@@ -54,11 +44,6 @@ function App() {
     dispatch({ type: INGREDIENT_MODAL_DELETE });
   };
 
-  // Обработка нажатия Esc
-  const handleEscKeydown = (e) => {
-    e.key === "Escape" && closeAllModals();
-  };
-
   const ingredientData = useSelector(
     (store) => store.ingredientInModal.ingredient
   );
@@ -75,8 +60,8 @@ function App() {
       {isOrderDetailsOpened && (
         <Modal
           title=" "
-          onOverlayClick={closeAllModals}
-          onEscKeydown={handleEscKeydown}
+          onClose={closeAllModals}
+
         >
           <OrderDetails />
         </Modal>
@@ -85,8 +70,8 @@ function App() {
       {ingredientData && (
         <Modal
           title="Детали ингредиента"
-          onOverlayClick={closeAllModals}
-          onEscKeydown={handleEscKeydown}
+          onClose={closeAllModals}
+
         >
           <IngredientDetails />
         </Modal>

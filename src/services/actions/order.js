@@ -1,4 +1,7 @@
 import {CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAILED} from '../types'
+import { orderApi } from '../api';
+
+
 
 export const order = (orderData) => (dispatch) => {
   
@@ -6,17 +9,7 @@ export const order = (orderData) => (dispatch) => {
     type: CREATE_ORDER_REQUEST,
   });
 
-  return fetch("https://norma.nomoreparties.space/api/orders", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(orderData),
-  })
-  .then((res) => {
-    
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-  })
+  return orderApi(orderData)
     .then ((res) => {
     if (res.success) 
         dispatch({

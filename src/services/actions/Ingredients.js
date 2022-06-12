@@ -4,13 +4,14 @@ import {
   GET_INGREDIENTS_ERROR,
 } from "../types";
 
+import { getIngredientsApi } from "../api";
+
 export function getIngredients() {
   return function (dispatch) {
     dispatch({
       type: GET_INGREDIENTS,
     });
-    fetch("https://norma.nomoreparties.space/api/ingredients")
-      .then((res) => res.json())
+    getIngredientsApi()
       .then((res) => {
         if (res && res.success) {
           dispatch({
