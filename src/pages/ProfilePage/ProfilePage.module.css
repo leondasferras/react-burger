@@ -1,0 +1,25 @@
+.profilePage {
+display: flex;
+flex-direction: row;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+
+}
+
+.link {
+  text-decoration:none;
+  padding: 8px 0;
+}
+
+.sectionDescription {
+
+}
+
+.form {
+  display: grid;
+  grid-auto-columns: max-content;
+}

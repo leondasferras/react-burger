@@ -16,7 +16,13 @@ import {
   INGREDIENT_MODAL_SET,
   INGREDIENT_MODAL_DELETE,
 } from "../../services/types";
-import {LoginPage} from "../../pages/LoginPage.jsx"
+import {LoginPage} from "../../pages/LoginPage/LoginPage.jsx"
+import {RegisterPage} from "../../pages/RegisterPage/RegisterPage"
+import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage"
+import {ResetPasswordPage} from "../../pages/ResetPasswordPage/ResetPasswordPage"
+import {ProfilePage} from "../../pages/ProfilePage/ProfilePage"
+
+
 
 
 function App() {
@@ -66,7 +72,20 @@ function App() {
           <Route path = "/login" exact ={true}>
               <LoginPage/>
           </Route>
-          <Route path = "/register">
+          <Route path = "/register" exact ={true}>
+              <RegisterPage/>
+          </Route>
+          <Route path = "/forgot-password" exact ={true}>
+              <ForgotPasswordPage/>
+          </Route>
+          <Route path = "/reset-password" exact ={true}>
+              <ResetPasswordPage/>
+          </Route>
+          <Route path ="/profile">
+                <ProfilePage/>
+          </Route>
+
+          <Route path ="/ingredients/:id">
 
           </Route>
 

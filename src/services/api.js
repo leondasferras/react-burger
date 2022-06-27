@@ -21,3 +21,14 @@ export const orderApi = (orderData) => {
   })
   .then(checkResponse)
 }
+
+export const registrationRequest  = ({email, password, name}) => {
+  return fetch (`${baseUrl}/auth/register`, {
+    method: 'POST',
+    headers:{
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password, name })
+  })
+  .then(checkResponse)
+}
