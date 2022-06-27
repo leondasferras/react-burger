@@ -7,7 +7,7 @@ import {
 import { setCookie, getCookie, deleteCookie } from "../../utils/cookiesHandlers";
 import { registrationRequest } from "../api";
 
-export const registration = () => {
+export const registration = (regData) => {
   return function (dispatch) {
     dispatch({
       type: REGISTRATION_REQUEST,

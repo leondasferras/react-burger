@@ -32,3 +32,15 @@ export const registrationRequest  = ({email, password, name}) => {
   })
   .then(checkResponse)
 }
+
+
+export const forgotPassRequest = ({email}) => {
+  return fetch (`${baseUrl}/password-reset`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({email})
+  })
+  .then(checkResponse)
+}
