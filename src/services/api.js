@@ -1,3 +1,5 @@
+import { getCookie } from "../utils/cookiesHandlers";
+
 const baseUrl = "https://norma.nomoreparties.space/api"
 
 
@@ -44,3 +46,29 @@ export const forgotPassRequest = ({email}) => {
   })
   .then(checkResponse)
 }
+
+
+export const loginRequest = ({email, password}) => {
+  return fetch(`${baseUrl}/auth/login`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({email, password})
+  })
+  .then(checkResponse)
+}
+
+
+export const logoutRequest = () => {
+  return fetch(`${baseUrl}/auth/logout`, {
+    method:'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({token:getCookie('refreshToken')})
+  })
+  .then(checkResponse)
+}
+
+

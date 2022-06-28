@@ -1,9 +1,16 @@
 import { NavLink, Link } from "react-router-dom";
 import { Input  } from "@ya.praktikum/react-developer-burger-ui-components";
 
+import { useDispatch, useSelector } from "react-redux";
+
 import styles from "./ProfilePage.module.css";
 
 export const ProfilePage = () => {
+const {name, email} = useSelector((store) => ({
+  name: store.auth.name,
+  email: store.auth.email
+}))
+
   return (
     <div className={styles.profilePage}>
       <nav className={`${styles.navigation} mr-15`}>
@@ -30,8 +37,8 @@ export const ProfilePage = () => {
         </p>
       </nav>
       <form className={styles.form} >
-          <Input size = {"default"} placeholder="Имя" icon="EditIcon"/>
-          <Input placeholder="Логин" icon="EditIcon"/>
+          <Input size = {"default"} placeholder="Имя" icon="EditIcon" value={name}/>
+          <Input placeholder="Логин" icon="EditIcon" value={email}/>
           <Input placeholder="Пароль" icon="EditIcon"/>
       </form>
 
