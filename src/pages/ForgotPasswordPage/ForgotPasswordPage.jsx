@@ -32,7 +32,7 @@ export const ForgotPasswordPage = () => {
 
   return (
     <div className={styles.forgotPasswordPage}> 
-      <Form title = "Восстановление пароля" buttonTitle = "Восстановить">
+      <Form title = "Восстановление пароля" buttonTitle = "Восстановить" onSubmit={handleFormSubmit}> 
           <Input placeholder="Укажите e-mail"
           />
       </Form>

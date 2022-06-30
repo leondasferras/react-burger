@@ -72,3 +72,13 @@ export const logoutRequest = () => {
 }
 
 
+export const resetPassRequest = ({password, token}) => {
+  return fetch(`${baseUrl}/reset-password`, {
+    method:'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({password, token})
+  })
+  .then(checkResponse)
+}
