@@ -14,7 +14,7 @@ export const logout = () => {
     logoutRequest()
     .then((res) => {
       if (res && res.success) {
-        deleteCookie('token')
+        deleteCookie('authToken')
         deleteCookie('refreshToken')
         dispatch({type:LOGOUT_SUCCESS})
       }

@@ -12,10 +12,13 @@ import {
   FORGOT_PASSWORD_SUCCESS,
   FORGOT_PASSWORD_FAILED 
 } from "../types";
+import {getCookie} from '../../utils/cookiesHandlers'
+
 
 const initialState = {
   name: '',
   email: '',
+  isAutorized: getCookie('authToken'),
 
   isRegRequested: false,
   isRegError: false,
@@ -60,6 +63,7 @@ export const auth = (state = initialState, action) => {
           name: action.payload.name,
           email: action.payload.email,
           isLoginRequested: false,
+          isAutorized: true
         }
 
       case LOGIN_FAILED:
@@ -82,6 +86,7 @@ export const auth = (state = initialState, action) => {
             name: '',
             email: '',
             isLogOutRequested: false,
+            isAutorized: false
           };
         }
         case LOGOUT_FAILED: {

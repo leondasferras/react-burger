@@ -21,6 +21,7 @@ import {RegisterPage} from "../../pages/RegisterPage/RegisterPage"
 import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage"
 import {ResetPasswordPage} from "../../pages/ResetPasswordPage/ResetPasswordPage"
 import {ProfilePage} from "../../pages/ProfilePage/ProfilePage"
+import {ProtectedRoute} from '../ProtectedRoute/ProtectedRoute'
 
 
 
@@ -81,9 +82,10 @@ function App() {
           <Route path = "/reset-password" exact ={true}>
               <ResetPasswordPage/>
           </Route>
-          <Route path ="/profile">
-                <ProfilePage/>
-          </Route>
+          
+          <ProtectedRoute path={"/profile"}>
+                  <ProfilePage/>
+          </ProtectedRoute>
 
           <Route path ="/ingredients/:id">
 
