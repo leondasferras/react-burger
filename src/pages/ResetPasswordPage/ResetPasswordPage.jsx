@@ -1,7 +1,7 @@
 import {useState} from "react";
 import { Form } from "../../components/Form/Form";
 import {Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import styles from './ResetPasswordPage.module.css'
 import {resetPassword} from '../../services/actions/reset-password'
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,8 @@ export const ResetPasswordPage = () => {
   })
 
   const dispatch = useDispatch();
+  const isAutorized = useSelector(state => state.auth.isAutorized)
+  const isForgotPassSuccess = useSelector(state => state.auth.isForgotPassSuccess)
 
   const handleInputData = (e) => {
     const input = e.target;
@@ -30,7 +32,17 @@ export const ResetPasswordPage = () => {
     dispatch(resetPassword(formData))
   }
 
+if (isAutorized) {
+  return (
+    <Redirect to ="/"/>
+  )
+}
 
+if (!isForgotPassSuccess) {
+  return (
+    <Redirect to="/forgot-password"/>
+  )
+}
 
 
 

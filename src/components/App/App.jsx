@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useLocation, Route, Switch, useHistory} from 'react-router-dom';
 
 import styles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader.jsx";
@@ -12,10 +12,7 @@ import { Modal } from "../Modal/Modal.jsx";
 import { OrderDetails } from "../OrderDetails/OrderDetails.jsx";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails.jsx";
 import { getIngredients } from "../../services/actions/Ingredients";
-import {
-  INGREDIENT_MODAL_SET,
-  INGREDIENT_MODAL_DELETE,
-} from "../../services/types";
+
 import {LoginPage} from "../../pages/LoginPage/LoginPage.jsx"
 import {RegisterPage} from "../../pages/RegisterPage/RegisterPage"
 import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage"
@@ -28,6 +25,8 @@ import {ProtectedRoute} from '../ProtectedRoute/ProtectedRoute'
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
 
   const [state, setState] = useState({ data: [] });
 
@@ -37,36 +36,34 @@ function App() {
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
 
+
+  const background = location.state?.background
+
   //Клик по кнопке "Оформить заказ"
   const buttonHandler = () => {
     setIsOrderDetailsOpened(true);
   };
 
-  //Клик по ингредиенту
-  const ingredientClickHandler = (data) => {
-    dispatch({ type: INGREDIENT_MODAL_SET, payload: data });
-  };
+
 
   // Закрытие всех модалок
-  const closeAllModals = () => {
+  const closeOrderModal = () => {
     setIsOrderDetailsOpened(false);
-
-    dispatch({ type: INGREDIENT_MODAL_DELETE });
   };
 
   const ingredientData = useSelector(
     (store) => store.ingredientInModal.ingredient
   );
   return (
-    <Router>
+
     <div className={styles.App}>
       <AppHeader />
 
       <main className={styles.main}>
-        <Switch>
+        <Switch location={background || location} >
           <Route path ="/" exact ={true}>
             <DndProvider backend={HTML5Backend}>
-              <BurgerIngredients ingredientClickHandler={ingredientClickHandler} />
+              <BurgerIngredients />
               <BurgerConstructor buttonHandler={buttonHandler} />
             </DndProvider>
           </Route>
@@ -88,34 +85,34 @@ function App() {
           </ProtectedRoute>
 
           <Route path ="/ingredients/:id">
-
+          <IngredientDetails />
           </Route>
 
-
-
         </Switch>
+
+        { background && <Route path ="/ingredients/:id">
+          <Modal
+          title="Детали ингредиента"
+          onClose={closeOrderModal}
+      >
+        <IngredientDetails />
+      </Modal>
+        </Route>}
+
       </main>
       {isOrderDetailsOpened && (
         <Modal
           title=" "
-          onClose={closeAllModals}
+          onClose={closeOrderModal}
 
         >
           <OrderDetails />
         </Modal>
       )}
 
-      {ingredientData && (
-        <Modal
-          title="Детали ингредиента"
-          onClose={closeAllModals}
 
-        >
-          <IngredientDetails />
-        </Modal>
-      )}
     </div>
-    </Router>
+
   );
 }
 

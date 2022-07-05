@@ -10,7 +10,16 @@ import {
   LOGOUT_FAILED,
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
-  FORGOT_PASSWORD_FAILED 
+  FORGOT_PASSWORD_FAILED,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAILED,
+  GET_USER_DATA_REQUEST,
+  GET_USER_DATA_SUCCESS,
+  GET_USER_DATA_FAILED,
+  SET_USER_DATA_REQUEST,
+  SET_USER_DATA_SUCCESS,
+  SET_USER_DATA_FAILED 
 } from "../types";
 import {getCookie} from '../../utils/cookiesHandlers'
 
@@ -30,7 +39,17 @@ const initialState = {
   isLogOutError: false,
 
   isForgotPassRequested: false,
-  isForgotPassError: false
+  isForgotPassError: false,
+  isForgotPassSuccess: false,
+
+  isResetPassRequested: false,
+  isResetPassError: false,
+
+  isUserDataRequested: false,
+  isUserDataError:false,
+
+  isSetUserDataRequested:false,
+  isSetUserDataError: false
 }
 
 export const auth = (state = initialState, action) => {
@@ -104,7 +123,8 @@ export const auth = (state = initialState, action) => {
         case FORGOT_PASSWORD_SUCCESS: {
           return {
             ...state,
-            isForgotPassRequested: false
+            isForgotPassRequested: false,
+            isForgotPassSuccess: true
           }
         }
 
@@ -114,6 +134,74 @@ export const auth = (state = initialState, action) => {
           isForgotPassRequested: false,
           isForgotPassError: true
         }
+
+        case RESET_PASSWORD_REQUEST: {
+          return {
+            ...state,
+            isResetPassRequested: true,
+            isResetPassError: false
+          }
+        }
+
+        case RESET_PASSWORD_SUCCESS: {
+          return {
+            ...state,
+            isResetPassRequested: false,
+            isResetPassSuccess: true,
+            isForgotPassSuccess: false
+          }
+        }
+
+        case RESET_PASSWORD_FAILED: 
+        return {
+          ...state,
+          isResetPassRequested: false,
+          isResetPassError: true
+        }
+
+        case GET_USER_DATA_REQUEST:
+          return {
+            ...state,
+            isUserDataRequested: true,
+            isUserDataError: false
+          }
+        
+        case GET_USER_DATA_SUCCESS:
+          return {
+            ...state,
+            isUserDataRequested: false,
+            name: action.payload.user.name,
+            email: action.payload.user.email
+          }
+        
+        case GET_USER_DATA_FAILED: 
+          return {
+            ...state,
+            isUserDataRequested: false,
+            isUserDataError: false
+          }
+
+          case SET_USER_DATA_REQUEST: 
+          return {
+            ...state,
+            isSetUserDataRequested:true,
+            isSetUserDataError: false
+          }
+
+          case SET_USER_DATA_SUCCESS:
+            return {
+              ...state,
+              isSetUserDataRequested: false,
+              name: action.payload.user.name,
+              email: action.payload.user.email
+            }
+
+          case SET_USER_DATA_FAILED: 
+            return {
+              ...state,
+              isGetUserDataRequested: false,
+              isGetUserDataError: false
+            }
       
       default:
          return state

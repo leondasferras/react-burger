@@ -5,6 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import styles from "./BurgerConstructor.module.css";
 import { order } from "../../services/actions/order";
@@ -16,9 +17,10 @@ import { updateConstructor } from "../../services/actions/constructor";
 
 export const BurgerConstructor = (props) => {
   const dispatch = useDispatch();
+  const isAutorized = useSelector((state) => state.auth.isAutorized);
   const ingredients = useSelector((store) => store.constructors.ingredients);
   const bun = useSelector((store) => store.constructors.bun);
-
+  const history = useHistory(); 
   const handleDropIngredient = (ingredientData) => {
     dispatch(
       addIngredient({
@@ -69,8 +71,12 @@ export const BurgerConstructor = (props) => {
 
   // Отправляем на свервер массив с ингредиентами и записывеам ответ в контекст
   const checkOut = () => {
-    dispatch(order(getIngredientsToCheckout()));
-    dispatch({ type: CONSTRUCTOR_RESET });
+    if (isAutorized) {
+      props.buttonHandler();
+      dispatch(order(getIngredientsToCheckout()));
+      dispatch({ type: CONSTRUCTOR_RESET });
+    }
+    else { history.replace({ pathname: '/login' });   }
   };
 
   //Функционал перетаскивания ингредиентов внутри конструктора
@@ -134,7 +140,7 @@ export const BurgerConstructor = (props) => {
           </div>
           <Button
             onClick={() => {
-              props.buttonHandler();
+              
               checkOut(getIngredientsToCheckout());
             }}
             type="primary"

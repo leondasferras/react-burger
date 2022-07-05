@@ -12,7 +12,14 @@
 }
 
 .menuButton {
-  display: flex;
+  display: grid;
   align-items: center;
+  grid-template-columns: max-content max-content;
+  grid-gap: 8px;
 
+}
+
+.link_active {
+  color: #F2F2F3;
+  text-decoration: none;
 }
