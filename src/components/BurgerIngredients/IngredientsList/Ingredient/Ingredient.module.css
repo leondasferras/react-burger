@@ -1,0 +1,16 @@
+.ingredientItem {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  max-width: 272px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itemName {
+  text-align: center;
+}

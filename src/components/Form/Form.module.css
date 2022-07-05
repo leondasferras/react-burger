@@ -1,0 +1,8 @@
+.Form {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 24px;
+  text-align: center;
+  justify-items: center;
+
+}
