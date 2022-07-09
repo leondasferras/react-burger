@@ -16,10 +16,17 @@
   align-items: center;
   grid-template-columns: max-content max-content;
   grid-gap: 8px;
+}
 
+.menuButton svg {
+  filter: invert(56%) sepia(9%) saturate(1073%) hue-rotate(201deg) brightness(94%) contrast(88%);
 }
 
 .link_active {
   color: #F2F2F3;
   text-decoration: none;
+}
+
+.link_active svg {
+  filter: none;
 }

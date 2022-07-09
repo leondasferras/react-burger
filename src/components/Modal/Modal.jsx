@@ -12,14 +12,10 @@ const Modal = ({ title, onClose, children }) => {
 
 const history = useHistory()
 
-const closeModal =() => {
- onClose()
-  history.goBack()
-}
 
   React.useEffect(() => {
     const handleEscKeydown = (e) => {
-      e.key === "Escape" && history.goBack();
+      e.key === "Escape" && onClose();
     };
     document.addEventListener("keydown", handleEscKeydown);
 
@@ -34,13 +30,13 @@ const closeModal =() => {
       <div className={`${styles.modal} pt-15 pr-10 pb-15 pl-10`}>
         <div className={styles.titleAndCloseButton}>
           <h3 className="text text_type_main-large">{title}</h3>
-          <div className={styles.closeButton} onClick={() => closeModal()}>
+          <div className={styles.closeButton} onClick={() => onClose()}>
             <CloseIcon />
           </div>
         </div>
         {children}
       </div>
-      <ModalOverlay onClick={closeModal} />
+      <ModalOverlay onClick={()=> onClose()} />
     </>,
     modalsContainer
   );

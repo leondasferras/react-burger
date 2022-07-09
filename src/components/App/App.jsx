@@ -46,14 +46,16 @@ function App() {
 
 
 
-  // Закрытие всех модалок
   const closeOrderModal = () => {
     setIsOrderDetailsOpened(false);
   };
 
-  const ingredientData = useSelector(
-    (store) => store.ingredientInModal.ingredient
-  );
+  const closeIngredientModal = () => {
+    history.goBack()
+  }
+
+
+
   return (
 
     <div className={styles.App}>
@@ -93,7 +95,7 @@ function App() {
         { background && <Route path ="/ingredients/:id">
           <Modal
           title="Детали ингредиента"
-          onClose={closeOrderModal}
+          onClose={closeIngredientModal}
       >
         <IngredientDetails />
       </Modal>

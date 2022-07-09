@@ -1,3 +1,4 @@
+import { isConstructorDeclaration } from "typescript";
 import { getCookie, setCookie } from "../utils/cookiesHandlers";
 
 const baseUrl = "https://norma.nomoreparties.space/api";
@@ -104,12 +105,13 @@ export const setUserDataRequest = (data) => {
     body: JSON.stringify(data),
     redirect: "follow",
     referrerPolicy: "no-referrer",
-  })
+  }) 
 };
 
 const requestWithExpiredToken = (url, config) => {
   return fetch(url, config).then(checkResponse)
     .catch((res) => {
+      console.log(res)
       return res.json()
         .then((err) => {
           console.log(err)
