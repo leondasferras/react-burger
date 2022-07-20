@@ -18,6 +18,7 @@ import {RegisterPage} from "../../pages/RegisterPage/RegisterPage"
 import {ForgotPasswordPage} from "../../pages/ForgotPasswordPage/ForgotPasswordPage"
 import {ResetPasswordPage} from "../../pages/ResetPasswordPage/ResetPasswordPage"
 import {ProfilePage} from "../../pages/ProfilePage/ProfilePage"
+import { FeedPage } from "../../pages/FeedPage/FeedPage";
 import {ProtectedRoute} from '../ProtectedRoute/ProtectedRoute'
 
 
@@ -89,6 +90,12 @@ function App() {
           <Route path ="/ingredients/:id">
           <IngredientDetails />
           </Route>
+
+          <Route path={"/feed"} exact ={true}>
+            <FeedPage/>
+          </Route>
+          <Route path={"/feed/:id"} exact ={true}></Route>
+          
 
         </Switch>
 

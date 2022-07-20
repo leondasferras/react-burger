@@ -23,7 +23,7 @@ export const AppHeader = () => {
       </NavLink>
 
       <NavLink
-        to="/orderlist"
+        to="/feed"
         activeClassName={styles.link_active}
         exact={true}
         className="text text_type_main-small text_color_inactive ml-2 pr-5"
