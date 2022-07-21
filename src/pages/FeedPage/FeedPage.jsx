@@ -1,7 +1,20 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { OrderList } from "../../components/OrderList/OrderList";
 import styles from "./FeedPage.module.css";
+import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from "../../services/types";
 
 export const FeedPage = () => {
+  const dispatch = useDispatch()
+ 
+  useEffect(() => {
+    const ws = new WebSocket("wss://norma.nomoreparties.space/orders/")
+    return () => {
+      dispatch({type: WS_CONNECTION_CLOSED})
+    }
+  })
+  
+
   return (
     <section className={`${styles.feedPage}`}>
       <h1 className="text text_type_main-large mb-5">Лента заказов</h1>
