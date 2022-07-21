@@ -9,6 +9,8 @@ import styles from "./ProfilePage.module.css";
 import { getUserData } from "../../services/actions/getUserData";
 import { setUserData } from "../../services/actions/setUserdata";
 
+import { OrderList } from "../../components/OrderList/OrderList";
+
 
 export const ProfilePage = () => {
 const dispatch = useDispatch();
@@ -91,6 +93,10 @@ const handleFormSubmit = (e) => {
               <Button type="primary" size="small">Сохранить</Button>
             </div>) : null}
         </form>
+      </Route>
+
+      <Route path ='/profile/orders' exact={true}>
+      <OrderList></OrderList>
       </Route>
 
 

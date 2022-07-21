@@ -1,0 +1,98 @@
+.orderInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orderComposition {
+  list-style: none;
+  align-self: stretch;
+  padding: 0;
+  overflow: scroll;
+  scrollbar-color: rgb(117, 104, 130);
+  max-height: 340px;
+}
+
+
+.orderComposition::-webkit-scrollbar {
+  width: 8px;
+  background-color: rgba(47, 47, 55, 1);
+}
+
+.orderComposition::-webkit-scrollbar-thumb {
+  background: rgba(133, 133, 173, 1);
+}
+
+.listItem {
+  display: flex;
+  width: 608px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+}
+
+.ingredientImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  border: double 2px transparent;
+  border-radius: 50%;
+  background-image: linear-gradient(rgba(19, 19, 22, 1), rgba(19, 19, 22, 1)),
+    radial-gradient(#801ab2, #4c4cff);
+  background-clip: content-box, border-box;
+}
+
+.image {
+
+ height: 100%
+  
+}
+
+.price {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 98px;
+}
+
+.ingredientName {
+  flex-basis: 425px
+}
+
+.orderNumber {
+  align-self: flex-start;
+}
+
+.orderStatus {
+  align-self: flex-start;
+  color:#00CCCC
+}
+
+.orderCompositionHeader {
+  align-self: flex-start;
+}
+
+.iconAndNameWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dataAndFinalPrice{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.finalPrice {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60px;
+}

@@ -12,6 +12,7 @@ import { Modal } from "../Modal/Modal.jsx";
 import { OrderDetails } from "../OrderDetails/OrderDetails.jsx";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails.jsx";
 import { getIngredients } from "../../services/actions/Ingredients";
+import { OrderInfo } from "../OrderInfo/OrderInfo";
 
 import {LoginPage} from "../../pages/LoginPage/LoginPage.jsx"
 import {RegisterPage} from "../../pages/RegisterPage/RegisterPage"
@@ -94,7 +95,9 @@ function App() {
           <Route path={"/feed"} exact ={true}>
             <FeedPage/>
           </Route>
-          <Route path={"/feed/:id"} exact ={true}></Route>
+          <Route path={"/feed/id"} exact ={true}>
+            <OrderInfo/>
+          </Route>
           
 
         </Switch>
