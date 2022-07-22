@@ -28,7 +28,8 @@ export const socketMiddleware = wsUrl => {
                 // функция, которая вызывается при получении события от сервера
         socket.onmessage = event => {
           const { data } = event;
-          dispatch({ type: 'WS_GET_MESSAGE', payload: data });
+          const parsedData = JSON.parse(data)
+          dispatch({ type: 'WS_GET_MESSAGE', payload: parsedData });
         };
                 // функция, которая вызывается при закрытии соединения
         socket.onclose = event => {

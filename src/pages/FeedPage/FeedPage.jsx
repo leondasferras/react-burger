@@ -1,18 +1,25 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { OrderList } from "../../components/OrderList/OrderList";
 import styles from "./FeedPage.module.css";
 import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from "../../services/types";
 
 export const FeedPage = () => {
   const dispatch = useDispatch()
+  const today = useSelector((store) => store.orders.today)
+  const total = useSelector((store) => store.orders.total)
+  const orders = useSelector((store) => store.orders.ordersList)
+  
+  const doneOrders = orders.filter(order => order.status === 'done')
+  const inWorkorders = orders.filter(order => order.status === 'created')
+  
  
   useEffect(() => {
-    const ws = new WebSocket("wss://norma.nomoreparties.space/orders/")
+    dispatch({type:WS_CONNECTION_START})
     return () => {
       dispatch({type: WS_CONNECTION_CLOSED})
     }
-  })
+  },[])
   
 
   return (
@@ -25,12 +32,11 @@ export const FeedPage = () => {
           <div className={`${styles.completedOrders}`}>
             <p className="text text_type_main-default mb-6">Готовы:</p>
             <ul className={`${styles.list} ${styles.completedList}`}>
-              <li className="text text_type_digits-default">034533</li>
-              <li className="text text_type_digits-default">034533</li>
-              <li className="text text_type_digits-default">034533</li>
-              <li className="text text_type_digits-default">034533</li>
-              <li className="text text_type_digits-default">034533</li>
-              <li className="text text_type_digits-default">034533</li>
+
+              { 
+                <li className="text text_type_digits-default">034533</li>
+                }
+
 
             </ul>
           </div>
@@ -48,11 +54,11 @@ export const FeedPage = () => {
           </div>
             <div className={`${styles.allTimeOrdersCounter}`}>
               <p className="text text_type_main-default">Выполнено за все время:</p>
-              <p className="text text_type_digits-large">28 752</p>
+              <p className="text text_type_digits-large">{total}</p>
             </div>
             <div className={`${styles.todayOrdersCounter}`}>
               <p className="text text_type_main-default">Выполнено за сегодня:</p>
-              <p className="text text_type_digits-large">138</p>
+              <p className="text text_type_digits-large">{today}</p>
             </div>
         </div>
       </div>
