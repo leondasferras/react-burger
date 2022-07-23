@@ -12,15 +12,12 @@
 .ordersNumbers {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 206px 150px 150px;
+  grid-template-rows: minmax(0, 360px) 150px 150px;
   grid-column-gap: 36px;
   grid-row-gap: 60px;
 }
 
-.list {
-  list-style: none;
-  padding: 0;
-}
+
 .completedOrders {
   grid-area: 1/1/2/2;
   
@@ -28,8 +25,11 @@
 
 .completedList {
   color:#00CCCC;
-  display: grid;
-  grid-gap:8px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 313px;
+  gap:8px;
 }
 
 .inProgressOrders{
@@ -37,8 +37,11 @@
 }
 
 .inProgressList {
-  display: grid;
-  grid-gap:8px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 313px;
+  gap:8px;
 }
 
 .allTimeOrdersCounter{

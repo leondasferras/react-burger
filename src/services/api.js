@@ -1,5 +1,5 @@
 import { isConstructorDeclaration } from "typescript";
-import { getCookie, setCookie } from "../utils/cookiesHandlers";
+import { deleteCookie, getCookie, setCookie } from "../utils/cookiesHandlers";
 
 const baseUrl = "https://norma.nomoreparties.space/api";
 
@@ -109,23 +109,23 @@ export const setUserDataRequest = (data) => {
 };
 
 const requestWithExpiredToken = (url, config) => {
-  return fetch(url, config).then(checkResponse)
-    .catch((res) => {
-      console.log(res)
-      return res.json()
-        .then((err) => {
-          console.log(err)
-          if (err?.message === 'jwt expired') {
+  return fetch(url, config)
+  .then((res) => {return res.json()})
+    .then((res) => {
+          if (res?.message === 'jwt expired') {
             return refreshTokenRequest()
               .then(res => {
+                deleteCookie("authToken")
+                deleteCookie("refreshToken")
                 const authToken = res.accessToken.split('Bearer ')[1];
                 const refreshToken = res.refreshToken;
                 setCookie("authToken", authToken )
                 setCookie("refreshToken", refreshToken )
                 (config.headers).Authorization = res.authToken
-                return fetch(url, config).then(checkResponse)
-              })
+                
+              }).then (()=> fetch(url, config).then(checkResponse))
           } 
+          else {return res}
         })
-    })
+    
 }

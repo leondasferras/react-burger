@@ -84,20 +84,30 @@ function App() {
               <ResetPasswordPage/>
           </Route>
           
-          <ProtectedRoute path={"/profile"}>
+          <ProtectedRoute path ='/profile/orders/:id' exact={true}>
+          <OrderInfo/>
+          </ProtectedRoute>
+
+          <ProtectedRoute path={"/profile"} exact={false}>
                   <ProfilePage/>
           </ProtectedRoute>
+          
+          
 
           <Route path ="/ingredients/:id">
           <IngredientDetails />
           </Route>
 
+
           <Route path={"/feed"} exact ={true}>
             <FeedPage/>
           </Route>
-          <Route path={"/feed/id"} exact ={true}>
+          <Route path="/feed/:id" exact ={true}>
             <OrderInfo/>
           </Route>
+
+
+
           
 
         </Switch>
@@ -110,6 +120,25 @@ function App() {
         <IngredientDetails />
       </Modal>
         </Route>}
+
+        { background && <Route path ={"/feed/:id"}>
+          <Modal
+          onClose={closeIngredientModal}
+          
+      >
+        <OrderInfo/>
+      </Modal>
+        </Route>}
+
+        { background && <Route path ={"/profile/orders/:id"}>
+          <Modal
+          onClose={closeIngredientModal}
+          
+      >
+        <OrderInfo/>
+      </Modal>
+        </Route>}
+
 
       </main>
       {isOrderDetailsOpened && (

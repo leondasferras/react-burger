@@ -25,15 +25,18 @@ export const Ingredient = (props) => {
     item: info,
   });
   return (
-    <Link to = {{ pathname: `/ingredients/${info._id}`,
-                  state: {background: location}}} >
-      <li
-        className={styles.ingredientItem}
-        ref={dragRef}
-      >
+    <Link
+      to={{
+        pathname: `/ingredients/${info._id}`,
+        state: { background: location },
+      }}
+    >
+      <li className={styles.ingredientItem} ref={dragRef}>
         <img className="pl-4 pr-4" src={info.image}></img>
         <section className={`${styles.price} mt-1 mb-1`}>
-          <span className="text text_type_digits-default mr-2 text_color_inactive">{info.price}</span>
+          <span className="text text_type_digits-default mr-2 text_color_inactive">
+            {info.price}
+          </span>
           <CurrencyIcon type="primary" />
         </section>
         <h4
@@ -41,7 +44,9 @@ export const Ingredient = (props) => {
         >
           {info.name}
         </h4>
-        {info.type !== "bun" && qty ? <Counter count={qty} size="small" /> : null}
+        {info.type !== "bun" && qty ? (
+          <Counter count={qty} size="small" />
+        ) : null}
         {info._id === bun ? <Counter count={1} size="small" /> : null}
       </li>
     </Link>

@@ -9,6 +9,6 @@ const composeEnhancers =
         : compose;
 
 
-const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware('wss://norma.nomoreparties.space/orders/all')) );
+const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware()) );
 export const store = createStore(rootReducer, enhancer);
 

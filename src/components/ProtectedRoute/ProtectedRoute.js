@@ -14,6 +14,7 @@ export const ProtectedRoute = ({ children, ...rest }) => {
             {...rest} 
             render = {({ location }) =>
             isAuthorized ? children :  <Redirect to = {{pathname: '/login', state: {from: location.pathname}}}/> }
+            
             />
     )
         }

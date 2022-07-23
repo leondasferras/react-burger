@@ -1,7 +1,7 @@
 import { WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_CONNECTION_ERROR, WS_CONNECTION_CLOSED, WS_GET_MESSAGE, WS_SEND_MESSAGE } from "../types";
 
 
-export const socketMiddleware = wsUrl => {
+export const socketMiddleware = () => {
     return store => {
         let socket = null;
 
@@ -11,7 +11,7 @@ export const socketMiddleware = wsUrl => {
  
       if (type === 'WS_CONNECTION_START') {
             // объект класса WebSocket
-        socket = new WebSocket(wsUrl);
+        socket = new WebSocket(action.payload);
       }
       if (socket) {
 
