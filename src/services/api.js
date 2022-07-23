@@ -89,7 +89,7 @@ export const getUserDataRequest = () => {
       "Content-Type": "application/json",
       Authorization: "Bearer " + getCookie("authToken"),
     },
-  })
+  });
 };
 
 export const setUserDataRequest = (data) => {
@@ -105,27 +105,29 @@ export const setUserDataRequest = (data) => {
     body: JSON.stringify(data),
     redirect: "follow",
     referrerPolicy: "no-referrer",
-  }) 
+  });
 };
 
 const requestWithExpiredToken = (url, config) => {
   return fetch(url, config)
-  .then((res) => {return res.json()})
     .then((res) => {
-          if (res?.message === 'jwt expired') {
-            return refreshTokenRequest()
-              .then(res => {
-                deleteCookie("authToken")
-                deleteCookie("refreshToken")
-                const authToken = res.accessToken.split('Bearer ')[1];
-                const refreshToken = res.refreshToken;
-                setCookie("authToken", authToken )
-                setCookie("refreshToken", refreshToken )
-                (config.headers).Authorization = res.authToken
-                
-              }).then (()=> fetch(url, config).then(checkResponse))
-          } 
-          else {return res}
-        })
-    
-}
+      return res.json();
+    })
+    .then((res) => {
+      if (res?.message === "jwt expired") {
+        return refreshTokenRequest()
+          .then((res) => {
+            deleteCookie("authToken");
+            deleteCookie("refreshToken");
+            const authToken = res.accessToken.split("Bearer ")[1];
+            const refreshToken = res.refreshToken;
+            setCookie("authToken", authToken);
+            setCookie("refreshToken", refreshToken);
+            config.headers.Authorization = res.authToken;
+          })
+          .then(() => fetch(url, config).then(checkResponse));
+      } else {
+        return res;
+      }
+    });
+};

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, Link, Route, Switch } from "react-router-dom";
+import { NavLink, Link, Route, Switch, useRouteMatch } from "react-router-dom";
 import { Input, button, Button  } from "@ya.praktikum/react-developer-burger-ui-components";
 import { logout } from "../../services/actions/logout";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,7 @@ import { OrderList } from "../../components/OrderList/OrderList";
 
 export const ProfilePage = () => {
 const dispatch = useDispatch();
+const isHistoryPage = useRouteMatch("/profile/orders");
 const {name, email} = useSelector((store) => ({
   name: store.auth.name,
   email: store.auth.email
@@ -90,7 +91,7 @@ const handleFormSubmit = (e) => {
         <p
           className={`${styles.sectionDescription} text text_type_main-default text_color_inactive mt-20`}
         >
-          В этом разделе вы можете изменить свои персональные данные
+          {isHistoryPage ?  "В этом разделе вы можете просмотреть свою историю заказов" :"В этом разделе вы можете изменить свои персональные данные" }
         </p>
       </nav>
 
