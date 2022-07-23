@@ -1,49 +1,48 @@
-import { WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_CONNECTION_ERROR, WS_CONNECTION_CLOSED, WS_GET_MESSAGE, WS_SEND_MESSAGE } from "../types";
-
+import {
+  WS_CONNECTION_START,
+  WS_CONNECTION_SUCCESS,
+  WS_CONNECTION_ERROR,
+  WS_CONNECTION_CLOSED,
+  WS_GET_MESSAGE,
+  WS_SEND_MESSAGE,
+} from "../types";
 
 export const socketMiddleware = () => {
-    return store => {
-        let socket = null;
+  return (store) => {
+    let socket = null;
 
-    return next => action => {
+    return (next) => (action) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
- 
-      if (type === 'WS_CONNECTION_START') {
-            // объект класса WebSocket
+
+      if (type === "WS_CONNECTION_START") {
         socket = new WebSocket(action.payload);
       }
       if (socket) {
-
-                // функция, которая вызывается при открытии сокета
-        socket.onopen = event => {
-          dispatch({ type: 'WS_CONNECTION_SUCCESS', payload: event });
+        socket.onopen = (event) => {
+          dispatch({ type: "WS_CONNECTION_SUCCESS", payload: event });
         };
 
-                // функция, которая вызывается при ошибке соединения
-        socket.onerror = event => {
-          dispatch({ type: 'WS_CONNECTION_ERROR', payload: event });
+        socket.onerror = (event) => {
+          dispatch({ type: "WS_CONNECTION_ERROR", payload: event });
         };
 
-                // функция, которая вызывается при получении события от сервера
-        socket.onmessage = event => {
+        socket.onmessage = (event) => {
           const { data } = event;
-          const parsedData = JSON.parse(data)
-          dispatch({ type: 'WS_GET_MESSAGE', payload: parsedData });
+          const parsedData = JSON.parse(data);
+          dispatch({ type: "WS_GET_MESSAGE", payload: parsedData });
         };
-                // функция, которая вызывается при закрытии соединения
-        socket.onclose = event => {
-          dispatch({ type: 'WS_CONNECTION_CLOSED', payload: event });
+        socket.onclose = (event) => {
+          dispatch({ type: "WS_CONNECTION_CLOSED", payload: event });
         };
 
-        if (type === 'WS_SEND_MESSAGE') {
+        if (type === "WS_SEND_MESSAGE") {
           const message = payload;
-                    // функция для отправки сообщения на сервер
           socket.send(JSON.stringify(message));
         }
       }
 
       next(action);
     };
-    };
-}; 
+  };
+};

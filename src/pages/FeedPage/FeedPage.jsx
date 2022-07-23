@@ -40,7 +40,14 @@ export const FeedPage = () => {
             <p className="text text_type_main-default mb-6">Готовы:</p>
             <ul className={`${styles.list} ${styles.completedList}`}>
               {doneOrders.slice(0, 20).map((num) => {
-                return <li className="text text_type_digits-default" key={Math.random().toString(36).slice(2)}>{num}</li>;
+                return (
+                  <li
+                    className="text text_type_digits-default"
+                    key={Math.random().toString(36).slice(2)}
+                  >
+                    {num}
+                  </li>
+                );
               })}
             </ul>
           </div>
@@ -49,7 +56,14 @@ export const FeedPage = () => {
             <p className="text text_type_main-default mb-6">В работе:</p>
             <ul className={`${styles.list} ${styles.inProgressList}`}>
               {inWorkorders.slice(0, 20).map((num) => {
-                return <li className="text text_type_digits-default" key={Math.random().toString(36).slice(2)}>{num}</li>;
+                return (
+                  <li
+                    className="text text_type_digits-default"
+                    key={Math.random().toString(36).slice(2)}
+                  >
+                    {num}
+                  </li>
+                );
               })}
             </ul>
           </div>
