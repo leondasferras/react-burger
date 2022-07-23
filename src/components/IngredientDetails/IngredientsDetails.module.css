@@ -1,0 +1,28 @@
+@import-normalize;
+
+.IngredientDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nutritionalValueGrid {
+  width: 100%;
+  display: grid;
+  grid: 1fr / repeat(4, 120px);
+  gap: 20px;
+  justify-content: center;
+  
+}
+
+.gridItem {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content;
+  gap: 10px;
+  justify-items: center;
+}
+
+.name {
+  padding-block-start: 0;
+}

@@ -1,0 +1,18 @@
+.orderList {
+  width: 768px;
+  overflow:scroll;
+  max-height: 900px;
+  scrollbar-color: rgb(117, 104, 130);
+}
+
+
+
+
+.orderList::-webkit-scrollbar {
+  width: 8px;
+  background-color: rgba(47, 47, 55, 1);
+}
+
+.orderList::-webkit-scrollbar-thumb {
+  background: rgba(133, 133, 173, 1);
+}
