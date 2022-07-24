@@ -83,10 +83,10 @@ export const OrderInfo = () => {
           )[0];
 
           if (ingredientInfo.type === "bun") {
-            totalCost += ingredientInfo.price * 2;
+            totalCost += ingredientInfo.price * 2 * ingredientQty;
             ingredientQty *= 2;
           }
-          if (ingredientInfo.type !== "bun") totalCost += ingredientInfo.price;
+          if (ingredientInfo.type !== "bun") totalCost += ingredientInfo.price * ingredientQty;
 
           return (
             <li className={`${styles.listItem}`} key={index}>
