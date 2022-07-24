@@ -1,0 +1,30 @@
+.modal {
+  width: 720px;
+  z-index: 20;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: rgba(28, 28, 33, 1);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.titleAndCloseButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-end;
+  width: 100%;
+}
+
+.closeButton {
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  opacity: 50%;
+}
