@@ -13,10 +13,8 @@ import styles from "./ProfilePage.module.css";
 import { getUserData } from "../../services/actions/getUserData";
 import { setUserData } from "../../services/actions/setUserdata";
 import { getCookie } from "../../utils/cookiesHandlers";
-import {
-  WS_CONNECTION_START,
-  WS_CONNECTION_CLOSED,
-} from "../../services/types";
+
+import { wsActions } from "../../services/actions/webSocket";
 import { OrderInfo } from "../../components/OrderInfo/OrderInfo";
 
 import { OrderList } from "../../components/OrderList/OrderList";
@@ -56,13 +54,13 @@ export const ProfilePage = () => {
 
   useEffect(() => {
     dispatch({
-      type: WS_CONNECTION_START,
+      type: wsActions.onStart,
       payload: `wss://norma.nomoreparties.space/orders?token=${getCookie(
         "authToken"
       )}`,
     });
     return () => {
-      dispatch({ type: WS_CONNECTION_CLOSED });
+      dispatch({ type: wsActions.onClose });
     };
   }, []);
 

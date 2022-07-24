@@ -123,9 +123,10 @@ const requestWithExpiredToken = (url, config) => {
             const refreshToken = res.refreshToken;
             setCookie("authToken", authToken);
             setCookie("refreshToken", refreshToken);
-            config.headers.Authorization = res.authToken;
+
+            
           })
-          .then(() => fetch(url, config).then(checkResponse));
+          .then((res) => fetch(url, config).then(checkResponse));
       } else {
         return res;
       }

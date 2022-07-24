@@ -34,9 +34,11 @@ export const Order = ({ orderInfo, isStatusShown }) => {
     return totPrice;
   };
 
+  if (!orderInfo || !ingredients) return null
+
   return (
     <Link
-      style={{ color: "white" }}
+      style={{ color: "white", textDecoration: 'none'}}
       to={{
         pathname: `${location.pathname}/${orderInfo._id}`,
         state: { background: location },

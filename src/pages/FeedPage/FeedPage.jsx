@@ -2,10 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OrderList } from "../../components/OrderList/OrderList";
 import styles from "./FeedPage.module.css";
-import {
-  WS_CONNECTION_START,
-  WS_CONNECTION_CLOSED,
-} from "../../services/types";
+import { wsActions } from "../../services/actions/webSocket";
 
 export const FeedPage = () => {
   const dispatch = useDispatch();
@@ -22,11 +19,11 @@ export const FeedPage = () => {
 
   useEffect(() => {
     dispatch({
-      type: WS_CONNECTION_START,
+      type: wsActions.onStart,
       payload: "wss://norma.nomoreparties.space/orders/all",
     });
     return () => {
-      dispatch({ type: WS_CONNECTION_CLOSED });
+      dispatch({ type: wsActions.onClose });
     };
   }, []);
 

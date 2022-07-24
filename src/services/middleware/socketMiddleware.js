@@ -1,13 +1,6 @@
-import {
-  WS_CONNECTION_START,
-  WS_CONNECTION_SUCCESS,
-  WS_CONNECTION_ERROR,
-  WS_CONNECTION_CLOSED,
-  WS_GET_MESSAGE,
-  WS_SEND_MESSAGE,
-} from "../types";
 
-export const socketMiddleware = () => {
+
+export const socketMiddleware = (wsActions) => {
   return (store) => {
     let socket = null;
 
@@ -15,28 +8,28 @@ export const socketMiddleware = () => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
 
-      if (type === "WS_CONNECTION_START") {
+      if (type === wsActions.onStart) {
         socket = new WebSocket(action.payload);
       }
       if (socket) {
         socket.onopen = (event) => {
-          dispatch({ type: "WS_CONNECTION_SUCCESS", payload: event });
+          dispatch({ type: wsActions.onOpen, payload: event });
         };
 
         socket.onerror = (event) => {
-          dispatch({ type: "WS_CONNECTION_ERROR", payload: event });
+          dispatch({ type: wsActions.onError, payload: event });
         };
 
         socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
-          dispatch({ type: "WS_GET_MESSAGE", payload: parsedData });
+          dispatch({ type: wsActions.onMessage, payload: parsedData });
         };
         socket.onclose = (event) => {
-          dispatch({ type: "WS_CONNECTION_CLOSED", payload: event });
+          dispatch({ type: wsActions.onclose, payload: event });
         };
 
-        if (type === "WS_SEND_MESSAGE") {
+        if (type === wsActions.onSend) {
           const message = payload;
           socket.send(JSON.stringify(message));
         }

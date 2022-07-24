@@ -30,6 +30,7 @@
   flex-wrap: wrap;
   max-height: 313px;
   gap:8px;
+  list-style: none;
 }
 
 .inProgressOrders{
@@ -42,6 +43,7 @@
   flex-wrap: wrap;
   max-height: 313px;
   gap:8px;
+  list-style: none;
 }
 
 .allTimeOrdersCounter{

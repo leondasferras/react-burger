@@ -7,10 +7,7 @@ import { useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { getCookie } from "../../utils/cookiesHandlers";
 import { useDispatch } from "react-redux";
-import {
-  WS_CONNECTION_START,
-  WS_CONNECTION_CLOSED,
-} from "../../services/types";
+import { wsActions } from "../../services/actions/webSocket";
 
 export const OrderInfo = () => {
   const dispatch = useDispatch();
@@ -20,20 +17,20 @@ export const OrderInfo = () => {
   useEffect(() => {
     if (isfeedPage) {
       dispatch({
-        type: WS_CONNECTION_START,
+        type: wsActions.onStart,
         payload: "wss://norma.nomoreparties.space/orders/all",
       });
     }
     if (isProfilePage) {
       dispatch({
-        type: WS_CONNECTION_START,
+        type: wsActions.onStart,
         payload: `wss://norma.nomoreparties.space/orders?token=${getCookie(
           "authToken"
         )}`,
       });
     }
     return () => {
-      dispatch({ type: WS_CONNECTION_CLOSED });
+      dispatch({ type: wsActions.onClose });
     };
   }, []);
 
@@ -50,12 +47,14 @@ export const OrderInfo = () => {
     if (orderData.status === "pending") return "Готовится";
   };
 
-  let totalCost = 0;
-  let uniqIngreidents = [...new Set(orderData.ingredients)];
 
-  if (!orderData) {
+
+  if (!orderData ) {
     return null;
   }
+
+  let totalCost = 0;
+  let uniqIngreidents = [...new Set(orderData.ingredients)];
 
   return (
     <div className={`${styles.orderInfo}`}>
