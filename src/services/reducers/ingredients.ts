@@ -4,13 +4,26 @@ import {
   GET_INGREDIENTS_SUCCESS,
 } from "../types";
 
-const initialState = {
+import {TIngredient} from '../../utils/types'
+import {TGetIngredientsActions} from '../actions/Ingredients'
+
+
+type TGetIngredientsState = {
+  ingredients: Array<TIngredient>;
+  isLoading: Boolean;
+  isError: Boolean;
+  qty?:{}
+}
+
+const initialState :TGetIngredientsState = {
   ingredients: [],
   isLoading: false,
   isError: false,
 };
 
-export const ingredientsReducer = (state = initialState, action) => {
+
+
+export const ingredientsReducer = (state = initialState, action:TGetIngredientsActions):TGetIngredientsState => {
   switch (action.type) {
     case GET_INGREDIENTS:
       return { ...state, isLoading: true, isError: false };

@@ -7,7 +7,8 @@ import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./services/store";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const rootElement = document.getElementById("root")
+const root = ReactDOM.createRoot(rootElement as Element);
 root.render(
 
   <Router>

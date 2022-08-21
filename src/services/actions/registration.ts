@@ -6,9 +6,29 @@ import {
 
 import { setCookie, getCookie, deleteCookie } from "../../utils/cookiesHandlers";
 import { registrationRequest } from "../api";
+import { TUser, AppDispatch, AppThunk, TUserData } from "../../utils/types";
 
-export const registration = (regData) => {
-  return function (dispatch) {
+
+export interface IRegisterRequestAction {
+	readonly type: typeof REGISTRATION_REQUEST;
+}
+
+export interface IRegisterSuccessAction {
+	readonly type: typeof REGISTRATION_SUCCESS;
+	readonly payload: TUser;
+}
+
+export interface IRegisterFailedAction {
+	readonly type: typeof REGISTRATION_FAILED;
+}
+
+
+
+export type TRegistrationActions = IRegisterRequestAction | IRegisterSuccessAction | IRegisterFailedAction;
+
+
+export const registration = (regData:TUserData) => {
+  return function (dispatch:AppDispatch) {
     dispatch({
       type: REGISTRATION_REQUEST,
     });

@@ -5,16 +5,16 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { useLocation, Route, Switch, useHistory } from "react-router-dom";
 
 import styles from "./App.module.css";
-import { AppHeader } from "../AppHeader/AppHeader.jsx";
-import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients.jsx";
-import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor.jsx";
+import { AppHeader } from "../AppHeader/AppHeader";
+import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
+import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import { Modal } from "../Modal/Modal.jsx";
 import { OrderDetails } from "../OrderDetails/OrderDetails.jsx";
-import { IngredientDetails } from "../IngredientDetails/IngredientDetails.jsx";
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { getIngredients } from "../../services/actions/Ingredients";
 import { OrderInfo } from "../OrderInfo/OrderInfo";
 
-import { LoginPage } from "../../pages/LoginPage/LoginPage.jsx";
+import { LoginPage } from "../../pages/LoginPage/LoginPage";
 import { RegisterPage } from "../../pages/RegisterPage/RegisterPage";
 import { ForgotPasswordPage } from "../../pages/ForgotPasswordPage/ForgotPasswordPage";
 import { ResetPasswordPage } from "../../pages/ResetPasswordPage/ResetPasswordPage";

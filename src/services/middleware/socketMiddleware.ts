@@ -1,10 +1,11 @@
+import { TWSActionNames} from '../actions/webSocket'
+import { AnyAction, MiddlewareAPI } from 'redux';
 
+export const socketMiddleware = (wsActions:TWSActionNames) => {
+  return (store:MiddlewareAPI) => {
+    let socket:WebSocket | null = null;
 
-export const socketMiddleware = (wsActions) => {
-  return (store) => {
-    let socket = null;
-
-    return (next) => (action) => {
+    return (next: (i:AnyAction) => void) => (action:AnyAction) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
 
@@ -26,7 +27,7 @@ export const socketMiddleware = (wsActions) => {
           dispatch({ type: wsActions.onMessage, payload: parsedData });
         };
         socket.onclose = (event) => {
-          dispatch({ type: wsActions.onclose, payload: event });
+          dispatch({ type: wsActions.onClose, payload: event });
         };
 
         if (type === wsActions.onSend) {

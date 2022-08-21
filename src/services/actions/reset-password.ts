@@ -4,9 +4,26 @@ import {
   RESET_PASSWORD_FAILED,
 } from "../types";
 import { resetPassRequest } from "../api";
+import { AppDispatch} from "../../utils/types";
 
-export const resetPassword = ({ password, token }) => {
-  return function (dispatch) {
+interface IResetPasswordRequestAction {
+  readonly type: typeof RESET_PASSWORD_REQUEST;
+}
+
+interface IResetPasswordSuccessAction {
+  readonly type: typeof RESET_PASSWORD_SUCCESS;
+}
+
+interface IResetPasswordFailedAction {
+  readonly type: typeof RESET_PASSWORD_FAILED;
+}
+
+export type TResetPassActions = IResetPasswordRequestAction | IResetPasswordSuccessAction |IResetPasswordFailedAction
+
+
+
+export const resetPassword = ({ password, token }: {password: string, token: string}) => {
+  return function (dispatch: AppDispatch) {
     dispatch({
       type: RESET_PASSWORD_REQUEST,
     });

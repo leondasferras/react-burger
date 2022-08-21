@@ -22,9 +22,44 @@ import {
   SET_USER_DATA_FAILED 
 } from "../types";
 import {getCookie} from '../../utils/cookiesHandlers'
+import { TRegistrationActions } from "../actions/registration";
+import { TLoginActions } from "../actions/login";
+import { TLogoutActions } from "../actions/logout";
+import { TForgotPassActions } from "../actions/forgotPassword";
+import { TResetPassActions } from "../actions/reset-password";
+import { TGetUserdataActions } from "../actions/getUserData";
+import { TSetUserdataActions } from "../actions/setUserdata";
+
+type TAuthState = {
+  name: String| undefined;
+  email: String;
+  isAutorized: string | boolean | undefined;
+  isRegRequested: Boolean,
+  isRegError: Boolean,
+
+  isLoginRequested: Boolean,
+  isLoginError: Boolean,
+
+  isLogOutRequested: Boolean,
+  isLogOutError: Boolean,
+
+  isForgotPassRequested: Boolean,
+  isForgotPassError: Boolean,
+  isForgotPassSuccess: Boolean,
+
+  isResetPassRequested: Boolean,
+  isResetPassSuccess: Boolean,
+  isResetPassError: Boolean,
+
+  isUserDataRequested: Boolean,
+  isUserDataError:Boolean,
+
+  isSetUserDataRequested:Boolean,
+  isSetUserDataError: Boolean
+}
 
 
-const initialState = {
+const initialState:TAuthState = {
   name: '',
   email: '',
   isAutorized: getCookie('authToken'),
@@ -43,6 +78,7 @@ const initialState = {
   isForgotPassSuccess: false,
 
   isResetPassRequested: false,
+  isResetPassSuccess: false,
   isResetPassError: false,
 
   isUserDataRequested: false,
@@ -52,7 +88,7 @@ const initialState = {
   isSetUserDataError: false
 }
 
-export const auth = (state = initialState, action) => {
+export const auth = (state = initialState, action: TRegistrationActions | TLoginActions | TLogoutActions | TLogoutActions | TForgotPassActions | TResetPassActions | TGetUserdataActions | TSetUserdataActions):TAuthState => {
 
     switch (action.type) {
       case REGISTRATION_REQUEST:
@@ -199,8 +235,8 @@ export const auth = (state = initialState, action) => {
           case SET_USER_DATA_FAILED: 
             return {
               ...state,
-              isGetUserDataRequested: false,
-              isGetUserDataError: false
+              isSetUserDataRequested: false,
+              isSetUserDataError: false
             }
       
       default:

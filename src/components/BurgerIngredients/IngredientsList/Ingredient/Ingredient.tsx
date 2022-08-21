@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 import { Link, Redirect, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "../../../../services/hooks";
 import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Ingredient.module.css";
-import { ingredientPropType } from "../../../../utils/prop-types.js";
+import {TIngredient} from '../../../../utils/types'
 
-export const Ingredient = (props) => {
+type TIngredientProps = {
+  key:string;
+  data:TIngredient;
+}
+
+export const Ingredient = (props:TIngredientProps) => {
   const [info, setInfo] = useState(props.data);
   const location = useLocation();
   const bun = useSelector((store) => store.constructors?.bun?._id);
@@ -53,6 +58,3 @@ export const Ingredient = (props) => {
   );
 };
 
-Ingredient.propTypes = {
-  data: ingredientPropType,
-};

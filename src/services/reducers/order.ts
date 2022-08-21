@@ -4,7 +4,19 @@ import {
   CREATE_ORDER_FAILED,
 } from "../types";
 
-const initialState = {
+import {ICreateOrderActions} from '../actions/order'
+
+type TOrderState = {
+  ingredients: Array<string> | null;
+  isLoading: boolean;
+  isError: boolean;
+  orderData: {
+    number:number;
+    name:string;
+  }
+}
+
+const initialState:TOrderState = {
   ingredients: null,
   isLoading: false,
   isError: false,
@@ -14,7 +26,7 @@ const initialState = {
   },
 };
 
-export const order = (state = initialState, action) => {
+export const order = (state = initialState, action:ICreateOrderActions):TOrderState => {
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
       return {

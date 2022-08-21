@@ -5,9 +5,28 @@ import {
 } from "../types";
 
 import { getIngredientsApi } from "../api";
+import { AppDispatch, TIngredient} from "../../utils/types";
+
+
+
+interface IGetIngredientsRequestAction {
+  readonly type: typeof GET_INGREDIENTS;
+}
+
+interface IGetIngredientsSuccessAction {
+  readonly type: typeof GET_INGREDIENTS_SUCCESS;
+  readonly payload: {ingredients:Array<TIngredient>, qtyObject:{}};
+}
+
+interface IGetIngredientsFailedAction {
+  readonly type: typeof GET_INGREDIENTS_ERROR;
+}
+
+export type TGetIngredientsActions  = IGetIngredientsRequestAction | IGetIngredientsSuccessAction | IGetIngredientsFailedAction
+
 
 export function getIngredients() {
-  return function (dispatch) {
+  return function (dispatch:AppDispatch) {
     dispatch({
       type: GET_INGREDIENTS,
     });
@@ -18,7 +37,7 @@ export function getIngredients() {
             type: GET_INGREDIENTS_SUCCESS,
             payload: {
               ingredients: res.data,
-              qtyObject: res.data.map((ingredient) => ({
+              qtyObject: res.data.map((ingredient: TIngredient) => ({
                 id: ingredient._id,
                 qty: 0,
               })),

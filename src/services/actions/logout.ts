@@ -7,9 +7,28 @@ import {
   deleteCookie,
 } from "../../utils/cookiesHandlers";
 
+import {AppDispatch} from "../../utils/types";
+
+
+interface ILogoutRequestAction {
+  readonly type: typeof LOGOUT_REQUEST;
+}
+
+interface ILogoutSuccessAction {
+  readonly type: typeof LOGOUT_SUCCESS;
+}
+
+interface ILogoutFailedAction {
+  readonly type: typeof LOGOUT_FAILED;
+}
+
+
+export type TLogoutActions = ILogoutRequestAction | ILogoutSuccessAction | ILogoutFailedAction;
+
+
 
 export const logout = () => {
-  return function(dispatch){
+  return function(dispatch:AppDispatch){
     dispatch({type: LOGOUT_REQUEST})
     logoutRequest()
     .then((res) => {

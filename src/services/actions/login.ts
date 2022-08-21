@@ -1,14 +1,34 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from "../types";
 import {
   setCookie,
-  getCookie,
-  deleteCookie,
 } from "../../utils/cookiesHandlers";
 
+import { TUser, AppDispatch, AppThunk, TUserData } from "../../utils/types";
 import { loginRequest } from "../api";
+import { store } from "../store";
 
-export const login = (loginData) => {
-  return function (dispatch) {
+
+
+interface ILoginRequestAction {
+  readonly type: typeof LOGIN_REQUEST;
+}
+
+interface ILoginSuccessAction {
+  readonly type: typeof LOGIN_SUCCESS;
+  readonly payload: TUser
+}
+
+interface ILoginFailed {
+  readonly type: typeof LOGIN_FAILED;
+}
+
+export type TLoginActions = ILoginRequestAction|ILoginSuccessAction|ILoginFailed
+
+
+
+
+export const login = (loginData:TUserData) => {
+  return function (dispatch:AppDispatch) {
     dispatch({ type: LOGIN_REQUEST });
     loginRequest(loginData)
       .then((res) => {

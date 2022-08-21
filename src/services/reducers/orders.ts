@@ -5,7 +5,18 @@ import {
   WS_GET_MESSAGE,
 } from "../types";
 
-const initialState = {
+import {TOrder} from '../../utils/types'
+import {TWSActionsTypes} from '../actions/webSocket'
+
+type TOrdersState = {
+  wsConnected: boolean;
+  wsError: string | undefined;
+  ordersList: Array<TOrder>;
+  total: number;
+  today:number;
+}
+
+const initialState:TOrdersState = {
   wsConnected: false,
   wsError: undefined,
   ordersList: [],
@@ -13,7 +24,7 @@ const initialState = {
   today: 0,
 };
 
-export const orders = (state = initialState, action) => {
+export const orders = (state = initialState, action:TWSActionsTypes): TOrdersState=> {
   switch (action.type) {
     case WS_CONNECTION_SUCCESS:
       return {
@@ -24,7 +35,7 @@ export const orders = (state = initialState, action) => {
     case WS_CONNECTION_ERROR:
       return {
         ...state,
-        error: action.payload,
+        wsError: action.payload,
         wsConnected: false,
       };
 

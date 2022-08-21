@@ -1,14 +1,17 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
 import { useInView } from "react-intersection-observer";
-import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
-import { IngredientsList } from "./IngredientsList/IngredientsList.jsx";
-import { ingredientPropType } from "../../utils/prop-types.js";
+import { IngredientsList } from "./IngredientsList/IngredientsList";
 import { Loader } from "../Loader/Loader";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 
-export const BurgerIngredients = (props) => {
+
+
+type TBurgerIngredientsProps = {
+
+}
+export const BurgerIngredients = () => {
   const isLoading = useSelector((store) => store.ingredientsReducer.isLoading);
   const isError = useSelector((store) => store.ingredientsReducer.isError);
   const [currentTab, setCurrentTab] = React.useState("one");
@@ -26,7 +29,7 @@ export const BurgerIngredients = (props) => {
     }
   }, [inViewBuns, inViewMain, inViewSauses]);
 
-  const onTabClick = (tab) => {
+  const onTabClick = (tab ="string") => {
     setCurrentTab(tab);
     const element = document.getElementById(tab);
     if (element) element.scrollIntoView({ behavior: "smooth" });
@@ -67,8 +70,6 @@ export const BurgerIngredients = (props) => {
             <ul className="ingredientList pl-4 pr-4">
               <IngredientsList
                 type="bun"
-                ingredientClickHandler={props.ingredientClickHandler}
-                setIngredientInModal={props.setIngredientInModal}
               />
             </ul>
           </section>
@@ -85,7 +86,6 @@ export const BurgerIngredients = (props) => {
             <ul className="ingredientList pl-4 pr-4">
               <IngredientsList
                 type="sauce"
-                ingredientClickHandler={props.ingredientClickHandler}
               />
             </ul>
           </section>
@@ -98,7 +98,6 @@ export const BurgerIngredients = (props) => {
             <ul className="ingredientList pl-4 pr-4">
               <IngredientsList
                 type="main"
-                ingredientClickHandler={props.ingredientClickHandler}
               />
             </ul>
           </section>
@@ -108,8 +107,3 @@ export const BurgerIngredients = (props) => {
   );
 };
 
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType),
-  ingredientClickHandler: PropTypes.func,
-  setIngredientInModal: PropTypes.func,
-};

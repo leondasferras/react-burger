@@ -1,9 +1,10 @@
 import { isConstructorDeclaration } from "typescript";
 import { deleteCookie, getCookie, setCookie } from "../utils/cookiesHandlers";
+import { TUserData } from "../utils/types";
 
 const baseUrl = "https://norma.nomoreparties.space/api";
 
-function checkResponse(res) {
+function checkResponse(res: Response) {
   return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
 }
 
@@ -11,7 +12,7 @@ export const getIngredientsApi = () => {
   return fetch(`${baseUrl}/ingredients`).then(checkResponse);
 };
 
-export const orderApi = (orderData) => {
+export const orderApi = (orderData: Array<string>) => {
   return fetch(`${baseUrl}/orders`, {
     method: "POST",
     headers: {
@@ -22,7 +23,7 @@ export const orderApi = (orderData) => {
   }).then(checkResponse);
 };
 
-export const registrationRequest = ({ email, password, name }) => {
+export const registrationRequest = ({ email, password, name }: TUserData) => {
   return fetch(`${baseUrl}/auth/register`, {
     method: "POST",
     headers: {
@@ -32,7 +33,7 @@ export const registrationRequest = ({ email, password, name }) => {
   }).then(checkResponse);
 };
 
-export const forgotPassRequest = ({ email }) => {
+export const forgotPassRequest = ({ email }: {email:string}) => {
   return fetch(`${baseUrl}/password-reset`, {
     method: "POST",
     headers: {
@@ -42,7 +43,7 @@ export const forgotPassRequest = ({ email }) => {
   }).then(checkResponse);
 };
 
-export const loginRequest = ({ email, password }) => {
+export const loginRequest = ({ email, password }: {email:string, password:string}) => {
   return fetch(`${baseUrl}/auth/login`, {
     method: "POST",
     headers: {
@@ -62,7 +63,7 @@ export const logoutRequest = () => {
   }).then(checkResponse);
 };
 
-export const resetPassRequest = ({ password, token }) => {
+export const resetPassRequest = ({ password, token }: {password:string, token:string}) => {
   return fetch(`${baseUrl}/reset-password`, {
     method: "POST",
     headers: {
@@ -92,7 +93,7 @@ export const getUserDataRequest = () => {
   });
 };
 
-export const setUserDataRequest = (data) => {
+export const setUserDataRequest = (data:TUserData) => {
   return requestWithExpiredToken(`${baseUrl}/auth/user`, {
     method: "PATCH",
     mode: "cors",
@@ -108,7 +109,7 @@ export const setUserDataRequest = (data) => {
   });
 };
 
-const requestWithExpiredToken = (url, config) => {
+const requestWithExpiredToken = (url:string, config: RequestInit) => {
   return fetch(url, config)
     .then((res) => {
       return res.json();

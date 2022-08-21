@@ -5,12 +5,23 @@ import {
   CONSTRUCTOR_UPDATE,
 } from "../types";
 
-const initialState = {
+import { TIngredient} from "../../utils/types";
+import {TConstructorActions} from "../actions/constructor"
+
+
+
+
+type TConstructorState = {
+  ingredients: Array<TIngredient>;
+  bun: {_id:string} | null
+}
+
+const initialState:TConstructorState = {
   ingredients: [],
   bun: null,
 };
 
-export const constructors = (state = initialState, action) => {
+export const constructors = (state = initialState, action:TConstructorActions):TConstructorState => {
   switch (action.type) {
     case CONSTRUCTOR_ADD:
       if (action.payload.type !== "bun") {

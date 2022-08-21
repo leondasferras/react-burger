@@ -1,6 +1,5 @@
 
 import styles from "./IngredientsDetails.module.css";
-import { ingredientPropType } from "../../utils/prop-types.js";
 import { useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 

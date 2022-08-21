@@ -1,9 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Ingredient } from "./Ingredient/Ingredient.jsx";
+import { useSelector } from "../../../services/hooks";
+import { Ingredient } from "./Ingredient/Ingredient";
 import styles from "./IngredientsList.module.css";
 
-export const IngredientsList = (props) => {
+
+type TIngredientListProps = {
+  type:string;
+
+}
+export const IngredientsList = (props:TIngredientListProps) => {
   const allIngredients = useSelector(
     (store) => store.ingredientsReducer.ingredients
   );
@@ -17,7 +22,6 @@ export const IngredientsList = (props) => {
       <Ingredient
         key={item._id}
         data={item}
-        clickHandler={props.ingredientClickHandler}
       />
     );
   });
