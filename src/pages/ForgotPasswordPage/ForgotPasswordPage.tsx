@@ -1,9 +1,9 @@
-import {useState} from "react";
+import React, {ChangeEvent, SyntheticEvent, useState} from "react";
 import { Form } from "../../components/Form/Form";
 import {Input} from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect } from "react-router-dom";
 import styles from './ForgotPasswordPage.module.css'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { forgotPassword } from "../../services/actions/forgotPassword";
 
 
@@ -17,7 +17,7 @@ export const ForgotPasswordPage = () => {
   const isAutorized = useSelector(state => state.auth.isAutorized)
   const isForgotPassSuccess = useSelector(state => state.auth.isForgotPassSuccess)
     
-  const handleInputData = (e) => {
+  const handleInputData = (e:ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
     const value = input.value;
     const name = input.name;
@@ -27,7 +27,7 @@ export const ForgotPasswordPage = () => {
     })
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e:React.SyntheticEvent) => {
     e.preventDefault();
     dispatch(forgotPassword(formData))
   }
@@ -50,7 +50,7 @@ if (isForgotPassSuccess) {
   return (
     <div className={styles.forgotPasswordPage}> 
       <Form title = "Восстановление пароля" buttonTitle = "Восстановить" onSubmit={handleFormSubmit}> 
-          <Input placeholder="Укажите e-mail"
+          <Input placeholder="Укажите e-mail" value={formData.email} onChange={handleInputData} name={'email'}
           />
       </Form>
       <p className="text text_type_main-small text_color_inactive">Вспомнили пароль? <Link to='/login' className={styles.link}>Войти</Link></p>

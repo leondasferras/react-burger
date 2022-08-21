@@ -31,8 +31,8 @@ import { TGetUserdataActions } from "../actions/getUserData";
 import { TSetUserdataActions } from "../actions/setUserdata";
 
 type TAuthState = {
-  name: String| undefined;
-  email: String;
+  name: string|undefined;
+  email: string;
   isAutorized: string | boolean | undefined;
   isRegRequested: Boolean,
   isRegError: Boolean,

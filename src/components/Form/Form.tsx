@@ -8,7 +8,7 @@ type TFormProps = {
   children: React.ReactNode;
   title: string | null;
   buttonTitle:string;
-  onSubmit: () => void
+  onSubmit: (e:React.SyntheticEvent) => void;
 }
 
 export const Form = ({ children, title, buttonTitle, onSubmit }:TFormProps) => {

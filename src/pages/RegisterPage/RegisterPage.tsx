@@ -1,8 +1,8 @@
-import {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import { Form } from "../../components/Form/Form";
 import {Input, EmailInput, PasswordInput  } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 import styles from './RegisterPage.module.css'
 import { registration } from "../../services/actions/registration";
 
@@ -17,7 +17,7 @@ export const RegisterPage = () => {
 
   const dispatch = useDispatch();
 
-  const handleInputData = (e) => {
+  const handleInputData = (e:ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
     const value = input.value;
     const name = input.name;
@@ -27,7 +27,7 @@ export const RegisterPage = () => {
     })
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e:React.SyntheticEvent) => {
     e.preventDefault();
     dispatch(registration(formData))
   }
@@ -37,8 +37,8 @@ export const RegisterPage = () => {
     <div className={styles.registerPage}>
       <Form title = "Регистрация" buttonTitle = "Зарегистрироваться" onSubmit={handleFormSubmit}>
           <Input onChange={handleInputData} placeholder="Имя" name ="name" value ={formData.name}/>
-          <EmailInput onChange={handleInputData} className ="mb-50" size="default"  name='email' value={formData.email}/>
-          <PasswordInput onChange={handleInputData} className = "pt-30" name='password' value={formData.password}/>
+          <EmailInput onChange={handleInputData} size="default"  name='email' value={formData.email}/>
+          <PasswordInput onChange={handleInputData}  name='password' value={formData.password}/>
       </Form>
       <p className="text text_type_main-small text_color_inactive">Уже зарегистрированы? <Link to='/login' className={styles.link}>Войти</Link></p>
     </div>

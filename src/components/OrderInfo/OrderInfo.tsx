@@ -1,12 +1,11 @@
 import styles from "./OrderInfo.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { formattedDate } from "../../utils/functions";
 import { useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { getCookie } from "../../utils/cookiesHandlers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { wsActions } from "../../services/actions/webSocket";
 
 export const OrderInfo = () => {
@@ -37,14 +36,14 @@ export const OrderInfo = () => {
   const ingredients = useSelector(
     (store) => store.ingredientsReducer.ingredients
   );
-  const orderId = useParams().id;
+  const orderId = useParams<{id?:string}>().id;
   const orderData = useSelector((store) =>
     store.orders.ordersList.find((i) => i._id === orderId)
   );
   const orderStatus = () => {
-    if (orderData.status === "done") return "Выполнен";
-    if (orderData.status === "created") return "Создан";
-    if (orderData.status === "pending") return "Готовится";
+    if (orderData?.status === "done") return "Выполнен";
+    if (orderData?.status === "created") return "Создан";
+    if (orderData?.status === "pending") return "Готовится";
   };
 
 
@@ -103,9 +102,9 @@ export const OrderInfo = () => {
                   {ingredientInfo.name}
                 </p>
               </div>
-              <p className={`${styles.price} text text_type_digits-default`}>
+              <p className={`${styles.price} text text_type_digits-default "ml-10"`}>
                 {`${ingredientQty} x ${ingredientInfo.price}`}
-                <CurrencyIcon className="ml-10" type="primary" />
+                <CurrencyIcon type="primary" />
               </p>
             </li>
           );

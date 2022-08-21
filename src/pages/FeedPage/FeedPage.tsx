@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { OrderList } from "../../components/OrderList/OrderList";
 import styles from "./FeedPage.module.css";
 import { wsActions } from "../../services/actions/webSocket";
@@ -31,7 +31,7 @@ export const FeedPage = () => {
     <section className={`${styles.feedPage}`}>
       <h1 className="text text_type_main-large mb-5">Лента заказов</h1>
       <div className={`${styles.sectionWrapper}`}>
-        <OrderList />
+        <OrderList isStatusShown={false} />
         <div className={`${styles.ordersNumbers}`}>
           <div className={`${styles.completedOrders}`}>
             <p className="text text_type_main-default mb-6">Готовы:</p>

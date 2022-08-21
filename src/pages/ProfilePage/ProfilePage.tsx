@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { NavLink, Link, Route, Switch, useRouteMatch } from "react-router-dom";
 import {
   Input,
-  button,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { logout } from "../../services/actions/logout";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 
 import styles from "./ProfilePage.module.css";
 
@@ -15,7 +14,6 @@ import { setUserData } from "../../services/actions/setUserdata";
 import { getCookie } from "../../utils/cookiesHandlers";
 
 import { wsActions } from "../../services/actions/webSocket";
-import { OrderInfo } from "../../components/OrderInfo/OrderInfo";
 
 import { OrderList } from "../../components/OrderList/OrderList";
 
@@ -23,17 +21,18 @@ export const ProfilePage = () => {
   const dispatch = useDispatch();
   const isHistoryPage = useRouteMatch("/profile/orders");
   const { name, email } = useSelector((store) => ({
-    name: store.auth.name,
-    email: store.auth.email,
+    name: store.auth?.name,
+    email: store.auth?.email,
   }));
 
-  const [currentFormData, setFormData] = useState({
+
+  const [currentFormData, setFormData] = useState<{name:string |undefined, email:string, password:string}>({
     name: "",
     email: "",
     password: "",
   });
 
-  const handleInputData = (e) => {
+  const handleInputData = (e:ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
     const value = input.value;
     const name = input.name;
@@ -64,7 +63,7 @@ export const ProfilePage = () => {
     };
   }, []);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e:React.SyntheticEvent) => {
     e.preventDefault();
     dispatch(setUserData(currentFormData));
   };
@@ -111,7 +110,7 @@ export const ProfilePage = () => {
               size={"default"}
               placeholder="Имя"
               icon="EditIcon"
-              value={currentFormData.name}
+              value={currentFormData.name?currentFormData.name:"value" }
               onChange={handleInputData}
               name="name"
             />

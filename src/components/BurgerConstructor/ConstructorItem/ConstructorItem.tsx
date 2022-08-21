@@ -1,14 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { useDrop, useDrag } from "react-dnd";
+import {TIngredient} from '../../../utils/types'
 
 import styles from "./ConstructorItem.module.css";
 import {
   ConstructorElement,
-  CurrencyIcon,
-  Button,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+
+type TConstructorItemProps = {
+  item:TIngredient;
+  handleDelete:(id:string|undefined)=>void;
+  index:number;
+  id:string|undefined;
+  moveCard:(dragIndex:number,hoverIndex:number)=>void;
+}
 
 export const ConstructorItem = ({
   item,
@@ -16,8 +22,8 @@ export const ConstructorItem = ({
   index,
   id,
   moveCard,
-}) => {
-  const ref = useRef(null);
+}:TConstructorItemProps) => {
+  const ref:any = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: "constructorItem",
     collect(monitor) {
@@ -25,7 +31,7 @@ export const ConstructorItem = ({
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item, monitor) {
+    hover(item:any, monitor) {
       if (!ref.current) {
         return;
       }
@@ -38,7 +44,7 @@ export const ConstructorItem = ({
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      const clientOffset = monitor.getClientOffset();
+      const clientOffset:any = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
@@ -73,10 +79,10 @@ export const ConstructorItem = ({
       style={{ opacity }}
     >
       <div className="mr-1">
-        <DragIcon type="pimary" />
+        <DragIcon type="primary" />
       </div>
       <ConstructorElement
-        type="null"
+        type = {undefined}
         isLocked={false}
         text={item.name}
         price={item.price}

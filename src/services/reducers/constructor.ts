@@ -13,7 +13,7 @@ import {TConstructorActions} from "../actions/constructor"
 
 type TConstructorState = {
   ingredients: Array<TIngredient>;
-  bun: {_id:string} | null
+  bun: TIngredient | null
 }
 
 const initialState:TConstructorState = {

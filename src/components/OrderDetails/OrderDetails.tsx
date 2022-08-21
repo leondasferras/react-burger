@@ -1,11 +1,11 @@
 import styles from "./OrderDetails.module.css";
 import icon from "../../images/stroke-icon.svg";
 
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 import { Loader } from "../Loader/Loader";
 
 const OrderDetails = () => {
-  const { burgerName, orderNum, isLoading, isError } = useSelector((store) => ({
+  const { orderNum, isLoading, isError } = useSelector((store) => ({
     burgerName: store.order.orderData.name,
     orderNum: store.order.orderData.number,
     isLoading: store.order.isLoading,

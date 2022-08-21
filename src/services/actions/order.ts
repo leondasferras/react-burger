@@ -19,7 +19,7 @@ export interface ICreateOrderFailedAction {
 export type ICreateOrderActions = ICreateOrderRequestAction | ICreateOrderSuccessAction | ICreateOrderFailedAction
 
 
-export const order = (orderData:Array<string>) => (dispatch:AppDispatch) => {
+export const order = (orderData:{ingredients:Array<String>}) => (dispatch:AppDispatch) => {
   
   dispatch({
     type: CREATE_ORDER_REQUEST,

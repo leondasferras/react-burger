@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useLocation, Route, Switch, useHistory } from "react-router-dom";
@@ -8,8 +8,8 @@ import styles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
-import { Modal } from "../Modal/Modal.jsx";
-import { OrderDetails } from "../OrderDetails/OrderDetails.jsx";
+import { Modal } from "../Modal/Modal";
+import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { getIngredients } from "../../services/actions/Ingredients";
 import { OrderInfo } from "../OrderInfo/OrderInfo";
@@ -21,13 +21,22 @@ import { ResetPasswordPage } from "../../pages/ResetPasswordPage/ResetPasswordPa
 import { ProfilePage } from "../../pages/ProfilePage/ProfilePage";
 import { FeedPage } from "../../pages/FeedPage/FeedPage";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
+import { AppDispatch } from '../../utils/types'
+
+
+interface LocationState {
+  from: {
+    pathname: string;
+  };
+  background?:any;
+}
+
 
 function App() {
   const dispatch = useDispatch();
-  const location = useLocation();
+  const location = useLocation<LocationState>();
   const history = useHistory();
 
-  const [state, setState] = useState({ data: [] });
 
   useEffect(() => {
     dispatch(getIngredients());

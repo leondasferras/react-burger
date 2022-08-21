@@ -1,8 +1,10 @@
 import { Redirect, Route, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../../services/reducers/auth";
+import { useSelector } from "../../services/hooks";
+import { ReactNode } from "react";
 
-export const ProtectedRoute = ({ children, ...rest }) => {
+
+
+export const ProtectedRoute = ({ children, ...rest }:{children:ReactNode, path:string, exact:boolean}) => {
   const isAuthorized = useSelector((store) => store.auth.isAutorized);
 
   return (

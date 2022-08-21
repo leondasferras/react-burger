@@ -4,7 +4,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { useHistory } from "react-router-dom";
 
 import styles from "./BurgerConstructor.module.css";
@@ -14,14 +14,20 @@ import { CONSTRUCTOR_DELETE, CONSTRUCTOR_RESET } from "../../services/types";
 import { addIngredient } from "../../services/actions/constructor";
 import { ConstructorItem } from "./ConstructorItem/ConstructorItem";
 import { updateConstructor } from "../../services/actions/constructor";
+import {TIngredient} from '../../utils/types'
 
-export const BurgerConstructor = (props) => {
+
+type TBurgerConstructorProps = {
+  buttonHandler: () => void;
+}
+
+export const BurgerConstructor = (props:TBurgerConstructorProps) => {
   const dispatch = useDispatch();
   const isAutorized = useSelector((state) => state.auth.isAutorized);
   const ingredients = useSelector((store) => store.constructors.ingredients);
   const bun = useSelector((store) => store.constructors.bun);
   const history = useHistory(); 
-  const handleDropIngredient = (ingredientData) => {
+  const handleDropIngredient = (ingredientData:any) => {
     dispatch(
       addIngredient({
         ...ingredientData,
@@ -30,7 +36,7 @@ export const BurgerConstructor = (props) => {
     );
   };
 
-  const handleDeleteItem = (id) => {
+  const handleDeleteItem = (id:string|undefined) => {
     dispatch({ type: CONSTRUCTOR_DELETE, payload: id });
   };
 
@@ -42,7 +48,7 @@ export const BurgerConstructor = (props) => {
   });
 
   // Создаем объект с массивом из id иннгредиентов
-  let idArray;
+  let idArray:Array<String>;
   const getIngredientsToCheckout = () => {
     if (ingredients) {
       idArray = ingredients.map((item) => {
@@ -70,7 +76,7 @@ export const BurgerConstructor = (props) => {
   };
 
   // Отправляем на свервер массив с ингредиентами и записывеам ответ в контекст
-  const checkOut = () => {
+  const checkOut = (ingredients:{ingredients:Array<String>}) => {
     if (isAutorized) {
       props.buttonHandler();
       dispatch(order(getIngredientsToCheckout()));
@@ -81,7 +87,7 @@ export const BurgerConstructor = (props) => {
 
   //Функционал перетаскивания ингредиентов внутри конструктора
 
-  const moveCard = (dragIndex, hoverIndex) => {
+  const moveCard = (dragIndex:number, hoverIndex:number) => {
     dispatch(updateConstructor(dragIndex, hoverIndex));
   };
 
@@ -91,7 +97,7 @@ export const BurgerConstructor = (props) => {
         <div className={`${styles.item} ml-8`}>
           <ConstructorElement
             type="top"
-            isLocked="true"
+            isLocked={true}
             text={`${bun.name} (верх)`}
             price={bun.price}
             thumbnail={bun.image}
@@ -121,7 +127,7 @@ export const BurgerConstructor = (props) => {
         <div className={`${styles.item} ml-8`}>
           <ConstructorElement
             type="bottom"
-            isLocked="true"
+            isLocked={true}
             text={`${bun.name} (низ)`}
             price={bun.price}
             thumbnail={bun.image}

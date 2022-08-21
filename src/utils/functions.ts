@@ -1,4 +1,4 @@
-export const formattedDate = (dateToFormat:Date) => {
+export const formattedDate = (dateToFormat:Date|string) => {
   const date:any = new Date();
   const orderDate: any = new Date(dateToFormat);
   const hours = orderDate.getHours();

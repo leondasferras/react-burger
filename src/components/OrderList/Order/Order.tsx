@@ -1,11 +1,18 @@
 import styles from "./Order.module.css";
-import { useSelector } from "react-redux";
-import { Link, Redirect, useLocation } from "react-router-dom";
+import { useSelector } from "../../../services/hooks";
+import { Link, useLocation } from "react-router-dom";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { order } from "../../../services/reducers/order";
 import { formattedDate } from "../../../utils/functions";
+import {TOrder} from '../../../utils/types'
 
-export const Order = ({ orderInfo, isStatusShown }) => {
+
+type TOrderProps = {
+  orderInfo: TOrder;
+  isStatusShown: Boolean;
+
+}
+
+export const Order = ({ orderInfo, isStatusShown }:TOrderProps) => {
   const location = useLocation();
 
   const ingredients = useSelector(

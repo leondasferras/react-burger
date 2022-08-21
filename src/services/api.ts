@@ -12,7 +12,7 @@ export const getIngredientsApi = () => {
   return fetch(`${baseUrl}/ingredients`).then(checkResponse);
 };
 
-export const orderApi = (orderData: Array<string>) => {
+export const orderApi = (orderData: {ingredients:Array<String>}) => {
   return fetch(`${baseUrl}/orders`, {
     method: "POST",
     headers: {

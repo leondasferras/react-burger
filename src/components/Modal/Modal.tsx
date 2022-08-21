@@ -1,20 +1,25 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import { ModalOverlay } from "../ModalOverlay/ModalOverlay.jsx";
+import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Modal.module.css";
 import PropTypes from "prop-types";
-import { useHistory } from 'react-router-dom';
 
-const modalsContainer = document.querySelector("#modals");
+const modalsContainer = document.querySelector("#modals") as Element;
 
-const Modal = ({ title, onClose, children }) => {
+type TModalProps = {
+  title?:string;
+  onClose: () => void;
+  children: React.ReactNode;
 
-const history = useHistory()
+}
+
+const Modal = ({ title, onClose, children }:TModalProps) => {
+
 
 
   React.useEffect(() => {
-    const handleEscKeydown = (e) => {
+    const handleEscKeydown = (e:KeyboardEvent) => {
       e.key === "Escape" && onClose();
     };
     document.addEventListener("keydown", handleEscKeydown);
@@ -31,7 +36,7 @@ const history = useHistory()
         <div className={styles.titleAndCloseButton}>
           <h3 className="text text_type_main-large">{title}</h3>
           <div className={styles.closeButton} onClick={() => onClose()}>
-            <CloseIcon />
+            <CloseIcon type="primary"/>
           </div>
         </div>
         {children}

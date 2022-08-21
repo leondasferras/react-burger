@@ -1,8 +1,11 @@
 import styles from "./OrderList.module.css";
 import { Order } from "./Order/Order";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 
-export const OrderList = ({ isStatusShown }) => {
+
+
+
+export const OrderList = ({ isStatusShown }:{isStatusShown:Boolean}) => {
   const ordersList = useSelector((store) => store.orders.ordersList);
 
   return (
