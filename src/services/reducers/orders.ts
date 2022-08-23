@@ -10,7 +10,7 @@ import {TWSActionsTypes} from '../actions/webSocket'
 
 type TOrdersState = {
   wsConnected: boolean;
-  wsError: string | undefined;
+  wsError: string | undefined | Event;
   ordersList: Array<TOrder>;
   total: number;
   today:number;

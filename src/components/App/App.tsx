@@ -24,17 +24,16 @@ import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { AppDispatch } from '../../utils/types'
 
 
-interface LocationState {
-  from: {
-    pathname: string;
-  };
-  background?:any;
+interface ILocation {
+  from: Location
+  background?:Location;
+  pathName: string;
 }
 
 
 function App() {
   const dispatch = useDispatch();
-  const location = useLocation<LocationState>();
+  const location = useLocation<ILocation>();
   const history = useHistory();
 
 

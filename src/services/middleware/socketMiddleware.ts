@@ -1,11 +1,12 @@
 import { TWSActionNames} from '../actions/webSocket'
-import { AnyAction, MiddlewareAPI } from 'redux';
+import { AnyAction, Middleware, MiddlewareAPI } from 'redux';
+import { AppDispatch, RootState } from '../../utils/types';
 
-export const socketMiddleware = (wsActions:TWSActionNames) => {
-  return (store:MiddlewareAPI) => {
+export const socketMiddleware = (wsActions:TWSActionNames):Middleware => {
+  return (store:MiddlewareAPI<AppDispatch, RootState>) => {
     let socket:WebSocket | null = null;
 
-    return (next: (i:AnyAction) => void) => (action:AnyAction) => {
+    return (next: (i:AnyAction) => void) => (action) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
 

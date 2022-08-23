@@ -27,7 +27,7 @@ export const BurgerConstructor = (props:TBurgerConstructorProps) => {
   const ingredients = useSelector((store) => store.constructors.ingredients);
   const bun = useSelector((store) => store.constructors.bun);
   const history = useHistory(); 
-  const handleDropIngredient = (ingredientData:any) => {
+  const handleDropIngredient = (ingredientData:TIngredient) => {
     dispatch(
       addIngredient({
         ...ingredientData,
@@ -42,7 +42,7 @@ export const BurgerConstructor = (props:TBurgerConstructorProps) => {
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item:TIngredient) {
       handleDropIngredient(item);
     },
   });

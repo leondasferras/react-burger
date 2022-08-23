@@ -19,7 +19,7 @@ import {WS_CONNECTION_START,
   }
 
 
-export const wsActions = {
+export const wsActions:TWSActionNames = {
   onStart: WS_CONNECTION_START,
   onClose: WS_CONNECTION_CLOSED,
   onSend: WS_SEND_MESSAGE,
@@ -46,7 +46,7 @@ export interface IWsConnectionSuccessAction {
 
 export interface IWsConnectionErrorAction {
   readonly type: typeof WS_CONNECTION_ERROR;
-  readonly payload: string;
+  readonly payload: Event;
 }
 
 export interface IWsConnectionClosedAction {
