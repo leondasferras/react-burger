@@ -3,6 +3,7 @@ import { useDispatch } from "../../services/hooks";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useLocation, Route, Switch, useHistory } from "react-router-dom";
+import { Location } from "history";
 
 import styles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader";
@@ -25,7 +26,7 @@ import { AppDispatch } from '../../utils/types'
 
 
 interface ILocation {
-  from: Location
+  from: Location 
   background?:Location;
   pathName: string;
 }
