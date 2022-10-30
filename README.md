@@ -4,10 +4,10 @@
 
 ## Использованные технологии
 
--HTML5 CSS3
--JavaScript, Typescript
--React, Redux
--Библиотеки React-dnd и react-router-v5
+-HTML5 CSS3;
+-JavaScript, Typescript;
+-React, Redux;
+-Библиотеки React-dnd и react-router-v5.
 
 ## Функционал проекта
 
