@@ -1,0 +1,11 @@
+.App {
+height: 100vh;
+
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgba(19, 19, 22, 1);
+}

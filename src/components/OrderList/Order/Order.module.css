@@ -1,0 +1,71 @@
+.numberAndTimeWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.order{
+  width: 100%;
+  list-style: none;
+  background-color: #1C1C21;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 40px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.ingredientImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  border: double 2px transparent;
+  border-radius: 50%;
+  background-image: linear-gradient(rgba(19, 19, 22, 1), rgba(19, 19, 22, 1)),
+    radial-gradient(#801ab2, #4c4cff);
+  background-clip: content-box, border-box;
+  position: relative;
+}
+
+.image {
+
+ height: 100%
+  
+}
+
+.ingredients {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.ingredientImage:nth-of-type(n+1) {
+  margin-left: -15px;
+}
+
+
+.ingredientsAndPriceWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #801AB3;
+}
+
+.hiddenIngredientsCounter {
+position: absolute;
+left: 21px;
+top: 21px;
+z-index: 10;
+}
+
+.hiddenIngredientsImage {
+  opacity: 0.6;
+}

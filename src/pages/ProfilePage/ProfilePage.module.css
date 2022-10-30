@@ -1,0 +1,38 @@
+.profilePage {
+display: flex;
+flex-direction: row;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+
+}
+
+.link {
+  text-decoration:none;
+  padding: 8px 0;
+}
+
+.link_active {
+  color: #F2F2F3;
+  text-decoration: none;
+}
+
+.link:hover {
+  opacity: 70%;
+}
+
+.form {
+  display: grid;
+  grid-auto-columns: max-content;
+  grid-gap: 18px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  
+}
